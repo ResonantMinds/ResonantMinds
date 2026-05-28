@@ -124,67 +124,111 @@
     <h2 class="title is-2 has-text-centered">Video Results</h2>
     <br>
 
-    <!-- Single Example with Carousel -->
-    <div class="scene-block" style="position: relative;">
-      <div class="columns is-centered">
-        <div class="column">
-          <h2 class="title is-4 has-text-centered" id="example-title">Case 1</h2>
-          
-          <!-- Scenario Description -->
-          <div class="box" style="background-color: #f8f9fa; margin-bottom: 1.5rem;">
-            <h3 class="title is-5">Scenario</h3>
-            <p id="example-scenario-desc" style="color: #555;">
-              In an art gallery filled with masterpieces, Einstein encounters the mysterious girl from Vermeer's painting. They discuss the mysteries of the universe, the eternity of art, and the relativity of time.
-            </p>
-            <div class="columns" style="margin-top: 1rem;">
-              <div class="column">
-                <p><strong>Agent A Goal:</strong> <span id="example-goal-a">Loading...</span></p>
-              </div>
-              <div class="column">
-                <p><strong>Agent B Goal:</strong> <span id="example-goal-b">Loading...</span></p>
-              </div>
-            </div>
+    <div class="scene-block">
+      <!-- Navigation Bar -->
+      <div style="display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem;">
+        <button id="example-prev" style="background: white; border: 1px solid #ddd; border-radius: 50%; width: 40px; height: 40px; color: #333; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: all 0.2s;">
+          ‹
+        </button>
+        <div style="text-align: center; min-width: 120px;">
+          <h2 class="title is-4" id="example-title" style="margin: 0;">Case 1</h2>
+          <div id="example-dots" style="margin-top: 0.5rem;">
+            <span style="display: inline-block; width: 8px; height: 8px; background: #3273dc; border-radius: 50%; margin: 0 3px;"></span>
+            <span style="display: inline-block; width: 8px; height: 8px; background: #ddd; border-radius: 50%; margin: 0 3px;"></span>
+            <span style="display: inline-block; width: 8px; height: 8px; background: #ddd; border-radius: 50%; margin: 0 3px;"></span>
+            <span style="display: inline-block; width: 8px; height: 8px; background: #ddd; border-radius: 50%; margin: 0 3px;"></span>
+            <span style="display: inline-block; width: 8px; height: 8px; background: #ddd; border-radius: 50%; margin: 0 3px;"></span>
+            <span style="display: inline-block; width: 8px; height: 8px; background: #ddd; border-radius: 50%; margin: 0 3px;"></span>
+            <span style="display: inline-block; width: 8px; height: 8px; background: #ddd; border-radius: 50%; margin: 0 3px;"></span>
           </div>
-          
-          <!-- Video -->
-          <div style="position: relative; display: inline-block; width: 100%; text-align: center;">
-            <video id="example-video" autoplay muted loop playsinline controls class="video-fade"
-                   style="max-width: 1200px; width: 90%; transition: opacity 0.5s ease-in-out;">
-              <source src="static/videos/case_001_stitched.mp4" type="video/mp4">
-            </video>
-            
-            <!-- Navigation Arrows for Examples -->
-            <button id="example-prev" style="position: absolute; left: -60px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); border: 2px solid white; border-radius: 50%; width: 45px; height: 45px; color: white; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
-              ‹
-            </button>
-            <button id="example-next" style="position: absolute; right: -60px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); border: 2px solid white; border-radius: 50%; width: 45px; height: 45px; color: white; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
-              ›
-            </button>
-          </div>
-          
-          <!-- Agent Personas -->
-          <div class="columns" style="margin-top: 2rem;">
-            <div class="column">
-              <div class="box" style="height: 100%;">
-                <h4 class="title is-6" id="example-agent-a-name">Agent A</h4>
-                <p><strong>Personality:</strong> <span id="example-agent-a-trait">Loading...</span></p>
-                <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;" id="example-agent-a-desc">Loading...</p>
-              </div>
-            </div>
-            <div class="column">
-              <div class="box" style="height: 100%;">
-                <h4 class="title is-6" id="example-agent-b-name">Agent B</h4>
-                <p><strong>Personality:</strong> <span id="example-agent-b-trait">Loading...</span></p>
-                <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;" id="example-agent-b-desc">Loading...</p>
-              </div>
-            </div>
-          </div>
-          
-          <p class="has-text-centered" id="example-counter" style="margin-top: 1rem; color: #999;">
-            1 / 7
+        </div>
+        <button id="example-next" style="background: white; border: 1px solid #ddd; border-radius: 50%; width: 40px; height: 40px; color: #333; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: all 0.2s;">
+          ›
+        </button>
+      </div>
+
+      <!-- Scenario Card -->
+      <div class="box" style="background-color: #f8f9fa; margin-bottom: 1.5rem; display: flex; align-items: flex-start; gap: 1rem;">
+        <div style="width: 44px; height: 44px; background: #eef2ff; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 20px;">
+          ☕
+        </div>
+        <div style="flex: 1;">
+          <h3 class="title is-5" style="margin-bottom: 0.5rem;">Scenario</h3>
+          <p id="example-scenario-desc" style="color: #555; line-height: 1.6;">
+            In an art gallery filled with masterpieces, Einstein encounters the mysterious girl from Vermeer's painting. They discuss the mysteries of the universe, the eternity of art, and the relativity of time.
           </p>
         </div>
       </div>
+
+      <!-- Agent Goals -->
+      <div class="columns" style="margin-bottom: 1.5rem;">
+        <div class="column">
+          <div class="box" style="background-color: #f0f7ff; border-left: 4px solid #3273dc; padding: 1rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <span style="width: 28px; height: 28px; background: #3273dc; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 13px; font-weight: bold;">A</span>
+              <strong style="color: #3273dc;">Agent A Goal</strong>
+            </div>
+            <p id="example-goal-a" style="color: #555; line-height: 1.5;">Loading...</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="box" style="background-color: #f0fff4; border-left: 4px solid #48c774; padding: 1rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <span style="width: 28px; height: 28px; background: #48c774; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 13px; font-weight: bold;">B</span>
+              <strong style="color: #48c774;">Agent B Goal</strong>
+            </div>
+            <p id="example-goal-b" style="color: #555; line-height: 1.5;">Loading...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video -->
+      <h3 class="title is-5" style="margin-bottom: 1rem; color: #333;">Generated Conversation Preview</h3>
+      <div style="position: relative; width: 100%; text-align: center; margin-bottom: 1rem;">
+        <video id="example-video" autoplay muted loop playsinline controls class="video-fade"
+               style="width: 100%; max-width: 100%; border-radius: 12px; transition: opacity 0.5s ease-in-out; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+          <source src="static/videos/case_001_stitched.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <!-- Agent Personas -->
+      <div class="columns" style="margin-top: 1.5rem;">
+        <div class="column">
+          <div class="box" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1.25rem;">
+            <div style="width: 56px; height: 56px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; font-weight: bold;">
+              A
+            </div>
+            <div style="flex: 1;">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem; flex-wrap: wrap;">
+                <h4 class="title is-6" style="margin: 0;" id="example-agent-a-name">Agent A</h4>
+                <span style="background: #3273dc; color: white; padding: 2px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 600;">Agent A</span>
+              </div>
+              <p style="margin-bottom: 0.35rem; font-size: 0.9rem;"><strong>Personality:</strong> <span id="example-agent-a-trait">Loading...</span></p>
+              <p style="font-size: 0.85rem; color: #666; line-height: 1.5;" id="example-agent-a-desc">Loading...</p>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="box" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1.25rem;">
+            <div style="width: 56px; height: 56px; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; font-weight: bold;">
+              B
+            </div>
+            <div style="flex: 1;">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem; flex-wrap: wrap;">
+                <h4 class="title is-6" style="margin: 0;" id="example-agent-b-name">Agent B</h4>
+                <span style="background: #48c774; color: white; padding: 2px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 600;">Agent B</span>
+              </div>
+              <p style="margin-bottom: 0.35rem; font-size: 0.9rem;"><strong>Personality:</strong> <span id="example-agent-b-trait">Loading...</span></p>
+              <p style="font-size: 0.85rem; color: #666; line-height: 1.5;" id="example-agent-b-desc">Loading...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Counter -->
+      <p class="has-text-centered" id="example-counter" style="margin-top: 1rem; color: #999;">
+        1 / 7
+      </p>
     </div>
 
   </div>
@@ -203,13 +247,13 @@
         <strong>Our closed-loop framework</strong> consists of three integrated modules:
       </p>
       <p class="has-text-justified" style="margin-top: 0.5rem;">
-        (1) <strong><span style="color: #3273dc;">Perception Module</span></strong> analyzes partner's multimodal behaviors including facial expressions, emotions, and audio prosody from video.
+        (1) <strong><span style="background-color: #3273dc; color: white; padding: 2px 10px; border-radius: 6px; font-size: 0.95em;">Perception Module</span></strong> analyzes partner's multimodal behaviors including facial expressions, emotions, and audio prosody from video.
       </p>
       <p class="has-text-justified" style="margin-top: 0.5rem;">
-        (2) <strong><span style="color: #48c774;">Social Reasoning Module</span></strong> employs Theory of Mind inference to deduce hidden mental states, generates multiple candidate responses, and uses an ensemble mechanism to select optimal actions balancing empathy, strategy, and personality coherence.
+        (2) <strong><span style="background-color: #48c774; color: white; padding: 2px 10px; border-radius: 6px; font-size: 0.95em;">Social Reasoning Module</span></strong> employs Theory of Mind inference to deduce hidden mental states, generates multiple candidate responses, and uses an ensemble mechanism to select optimal actions balancing empathy, strategy, and personality coherence.
       </p>
       <p class="has-text-justified" style="margin-top: 0.5rem;">
-        (3) <strong><span style="color: #ff9800;">Expression Module</span></strong> synthesizes emotionally-controllable dual-agent videos with synchronized speech, capturing both speaker articulation and listener reactive expressions.
+        (3) <strong><span style="background-color: #ff9800; color: white; padding: 2px 10px; border-radius: 6px; font-size: 0.95em;">Expression Module</span></strong> synthesizes emotionally-controllable dual-agent videos with synchronized speech, capturing both speaker articulation and listener reactive expressions.
       </p>
     </div>
 
@@ -226,7 +270,7 @@
     <div class="content">
       <img src="static/images/result_new.png" alt="Representative Results" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: block; margin: 0 auto;">
       <p class="has-text-justified" style="margin-top: 1rem;">
-        <strong>Representative generated conversational avatars.</strong> Each pair shows a speaker (left) and a reactive listener (right). The Perception module analyzes the partner's speech, emotion, and facial cues from the prior turn. The Social Reasoning module infers the partner's mental states via ToM and selects an appropriate response through the ensemble mechanism. The Expression module then renders the speaker's emotion-controlled speech and facial animation, alongside the listener's personality-driven backchannel reactions.
+        <strong>Representative generated conversational avatars.</strong> Each pair shows a speaker (left) and a reactive listener (right).
       </p>
     </div>
     
@@ -329,7 +373,7 @@
             <td>57.83</td>
             <td>75.11</td>
             <td style="background-color: #e8f4f8;"><strong>21.91</strong></td>
-            <td style="background-color: #e8f4f8;"><strong>-31.54</strong></td>
+            <td><strong>-31.54</strong></td>
             <td>2.49</td>
             <td>-</td>
           </tr>
@@ -451,7 +495,7 @@
             <td style="color: gray;">0.06</td>
             <td>6.54</td>
             <td>0.03</td>
-            <td style="background-color: #e8f4f8;"><strong>7.92</strong></td>
+            <td><strong>7.92</strong></td>
             <td>0.05</td>
           </tr>
           <tr>
@@ -481,7 +525,7 @@
             <td style="color: gray;">0.44</td>
             <td>87.26</td>
             <td>0.39</td>
-            <td style="background-color: #e8f4f8;"><strong>96.71</strong></td>
+            <td><strong>96.71</strong></td>
             <td>0.65</td>
           </tr>
           <tr>
@@ -526,7 +570,7 @@
             <td style="color: gray;">1.23</td>
             <td>66.93</td>
             <td>1.30</td>
-            <td style="background-color: #e8f4f8;"><strong>90.72</strong></td>
+            <td><strong>90.72</strong></td>
             <td>1.25</td>
           </tr>
           <tr>
@@ -536,7 +580,7 @@
             <td style="color: gray;">0.01</td>
             <td>2.30</td>
             <td>0.01</td>
-            <td style="background-color: #e8f4f8;"><strong>2.94</strong></td>
+            <td><strong>2.94</strong></td>
             <td>0.02</td>
           </tr>
           <tr>
@@ -545,7 +589,7 @@
             <td style="color: gray;">0.02</td>
             <td>1.89</td>
             <td>0.01</td>
-            <td style="background-color: #e8f4f8;"><strong>1.95</strong></td>
+            <td><strong>1.95</strong></td>
             <td>0.01</td>
           </tr>
           <tr>
@@ -554,7 +598,7 @@
             <td style="color: gray;">0.03</td>
             <td>4.79</td>
             <td>0.04</td>
-            <td style="background-color: #e8f4f8;"><strong>4.85</strong></td>
+            <td><strong>4.85</strong></td>
             <td>0.02</td>
           </tr>
         <tr>
@@ -564,7 +608,7 @@
             <td style="color: gray;">0.57</td>
             <td>82.98</td>
             <td>0.53</td>
-            <td style="background-color: #e8f4f8;"><strong>88.23</strong></td>
+            <td><strong>88.23</strong></td>
             <td>0.89</td>
           </tr>
           <tr>
@@ -582,7 +626,7 @@
             <td style="color: gray;">0.40</td>
             <td>89.11</td>
             <td>0.41</td>
-            <td style="background-color: #e8f4f8;"><strong>94.25</strong></td>
+            <td><strong>94.25</strong></td>
             <td>0.48</td>
           </tr>
           <tr>
@@ -656,7 +700,7 @@
             <td><strong>-0.08</strong></td>
             <td><strong>-1.22</strong></td>
             <td><strong>-0.17</strong></td>
-            <td style="background-color: #e8f4f8;"><strong>+0.20</strong></td>
+            <td><strong>+0.20</strong></td>
           </tr>
         </tbody>
       </table>
@@ -746,12 +790,12 @@
           </tr>
           <tr>
             <td><strong>Ours</strong></td>
-            <td style="background-color: #e8f4f8;"><strong>3.50</strong></td>
+            <td><strong>3.50</strong></td>
             <td style="background-color: #e8f4f8;"><strong>3.88</strong></td>
             <td style="background-color: #e8f4f8;"><strong>3.84</strong></td>
             <td>3.67</td>
-            <td style="background-color: #e8f4f8;"><strong>3.88</strong></td>
-            <td style="background-color: #e8f4f8;"><strong>36.0%</strong></td>
+            <td><strong>3.88</strong></td>
+            <td><strong>36.0%</strong></td>
           </tr>
         </tbody>
       </table>
@@ -867,6 +911,7 @@
   const examplePrevBtn = document.getElementById('example-prev');
   const exampleNextBtn = document.getElementById('example-next');
   const exampleCounter = document.getElementById('example-counter');
+  const exampleDots = document.getElementById('example-dots');
   const audioControlBtn = document.getElementById('audio-control');
   
   // Embedded case metadata (avoids CORS issues when opening locally)
@@ -1092,6 +1137,17 @@
     }
     if (exampleCounter) {
       exampleCounter.textContent = `${currentExampleIndex + 1} / ${caseMetadata.length}`;
+    }
+    
+    // Update pagination dots
+    if (exampleDots) {
+      exampleDots.innerHTML = '';
+      for (let i = 0; i < caseMetadata.length; i++) {
+        const dot = document.createElement('span');
+        dot.style.cssText = 'display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin: 0 3px; transition: background 0.3s;';
+        dot.style.background = i === currentExampleIndex ? '#3273dc' : '#ddd';
+        exampleDots.appendChild(dot);
+      }
     }
   }
   
