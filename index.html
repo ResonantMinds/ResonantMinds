@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="Resonant Minds: Closed-Loop Social Avatars with Theory of Mind">
+  <meta name="keywords" content="Social Avatars, Theory of Mind, Multimodal Generation, Talking Head, Personality">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Resonant Minds: Closed-Loop Social Avatars with Theory of Mind
+  </title>
+
+
+
+  <link rel="stylesheet" href="./static/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <style>
+    /* Constrain all sections from Abstract downward to match abstract text width */
+    #abstract .container,
+    #abstract ~ section .container,
+    #abstract ~ footer .container {
+      max-width: 75% !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+  </style>
+
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+</head>
+
+
+<body>
+<section class="hero is-fullheight video" style="overflow: hidden; position:relative; background-color: black;">
+  <!-- Video Carousel Background -->
+  <div class="hero-video" id="hero-video-container" style="height: 100%; width: 177.77777778vh; min-width: 100%;min-height: 56.25vw;">
+    <video id="hero-video" playsinline autoplay muted loop style="transition: opacity 0.5s ease-in-out;">
+      <source src="./static/videos/hero_case_005.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- Video Navigation Arrows -->
+  <button id="hero-prev" class="hero-nav-btn hero-nav-left" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(0,0,0,0.5); border: 2px solid white; border-radius: 50%; width: 50px; height: 50px; color: white; font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+    ‹
+  </button>
+  <button id="hero-next" class="hero-nav-btn hero-nav-right" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(0,0,0,0.5); border: 2px solid white; border-radius: 50%; width: 50px; height: 50px; color: white; font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+    ›
+  </button>
+
+  <div class="is-hidden-tablet"
+    style="display: flex; justify-content: center; align-items: center; width: 100vw; height: 100vh; background-color: black; left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);">
+    <video id="hero-video-mobile" playsinline autoplay muted loop style="width: 90%; height: auto; min-height: 100%; transition: opacity 0.5s ease-in-out;">
+      <source src="./static/videos/hero_case_005.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="overlay"></div>
+
+  <!-- Hero content: will be in the middle -->
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="subtitle is-2 publication-title is-size-3-mobile" style="font-size: 2.5rem; font-weight: normal; margin-bottom: 0.5rem; color: white;">
+        Resonant Minds
+      </h1>
+      <h1 class="subtitle is-2 publication-title is-size-3-mobile" style="font-size: 2.5rem; font-weight: normal; color: white;">
+        Closed-Loop Social Avatars with Theory of Mind
+      </h1>
+      <div class="is-size-5 publication-authors" style="margin-top: 2rem;">
+        <span class="author-block" style="color: white; font-weight: normal;"><a href="https://jxb1st.github.io/" style="color: white; text-decoration: underline;">Jianxu Shangguan</a>, <a href="https://xj.editlife.cn" style="color: white; text-decoration: underline;">Jing Xu</a>, <a href="https://alvinyh.github.io/" style="color: white; text-decoration: underline;">Hang Ye</a>, <a href="https://shirleymaxx.github.io/" style="color: white; text-decoration: underline;">Xiaoxuan Ma</a>, <a href="https://cfcs.pku.edu.cn/wangyizhou/" style="color: white; text-decoration: underline;">Yizhou Wang</a>, <a href="https://wentao.live/" style="color: white; text-decoration: underline;">Wentao Zhu</a></span>
+      </div>
+      <div class="publication-links" style="margin-top: 1.5rem;">
+        <a href="#" class="button is-rounded" style="margin: 0 0.5rem; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; backdrop-filter: blur(4px);">
+          <span class="icon"><svg viewBox="0 0 2048 2048" width="16" height="16" fill="currentColor" style="vertical-align: middle;"><path d="M894.142 947.471c0-71.104-26.83-128.746-59.926-128.746s-59.926 57.642-59.926 128.746c0 71.104 26.83 128.746 59.926 128.746s59.926-57.642 59.926-128.746zM1273.782 947.471c0-71.104-26.798-128.746-59.852-128.746s-59.852 57.642-59.852 128.746c0 71.104 26.798 128.746 59.852 128.746s59.852-57.642 59.852-128.746zM1374.216 666.501h-63.43c0-33.36 12.354-63.926 32.432-88.356-21.578-54.14-150.792-121.856-319.218-121.856-168.36 0-297.64 67.716-319.218 121.856 19.998 24.43 32.504 54.996 32.504 88.356h-63.502c0-44.712-39.57-81.072-88.144-81.072v-63.502c24.568 0 47.572 6.218 68.14 16.216 46.578-78.212 190.288-145.356 370.22-145.356 179.998 0 323.642 67.146 370.212 145.356 20.576-9.998 43.572-16.216 68.148-16.216v63.502c-48.574 0-88.144 36.36-88.144 81.072zM1910.36 164.931c-19.002 35.284-35.43 42.358-66.29 51.924-26.5 8.002-73.070 4.286-113.21-11.352-9.142-3.576-17.43-9.362-26.148-14.072-25.994-13.926-41.64-11.212-61.426 9.926-11.36 12.214-47.002 44.434-95.926 90.858 99.854 118.858 160.146 271.858 160.146 439.216 0 167.286-60.284 320.358-160.146 439.216 48.926 46.358 84.494 78.496 95.854 90.778 19.786 21.146 35.43 23.86 61.432 9.86 8.712-4.644 16.998-10.43 26.142-14 40.068-15.646 86.71-19.36 113.21-11.286 30.786 9.494 47.286 16.566 66.29 51.85 11.644 27.216 15.93 51.214 7.432 81.716-8.506 30.362-43.286 49.862-87.004 57.432-35.072 6.144-20.64 11.85-21.284 43.286-0.856 47.14-17.788 84.202-58.002 109.356-30.428 18.856-65.288 20.356-98.998 19.142-46.358-1.5-94.142-24.43-105.86-51.998-13.926-32.57 1.726-53.57 14.504-76.858 16.502-29.784 8.426-59.64-12.932-84.502-23.070-27.070-79.784-85.284-112.070-119.64-114.57 86.858-257.076 139.060-412 139.060-155.004 0-297.502-52.202-412.146-139.14-32.286 34.442-89 92.658-112.070 119.728-21.358 24.862-29.36 54.718-12.932 84.576 12.786 23.216 28.43 44.214 14.57 76.786-11.784 27.64-59.568 50.498-105.926 51.998-33.712 1.288-68.644-0.212-99.072-19.142-40.14-25.074-57.14-62.216-58.002-109.282-0.57-31.502 13.86-37.216-21.284-43.36-43.71-7.504-78.424-27.070-86.996-57.358-8.5-30.5-4.214-54.572 7.432-81.716 18.996-35.284 35.496-42.43 66.282-51.924 26.5-8.074 73.142-4.286 113.284 11.286 9.142 3.642 17.43 9.428 26.142 14 26.002 14 41.574 11.352 61.426-9.786 11.424-12.362 47.002-44.5 95.854-90.858-99.848-118.858-160.132-271.93-160.132-439.216 0-167.358 60.358-320.498 160.146-439.288-48.86-46.35-84.428-78.57-95.854-90.784-19.858-21.138-35.43-23.852-61.426-9.926-8.712 4.718-16.998 10.504-26.142 14.072-40.14 15.638-86.784 19.354-113.284 11.352-30.786-9.568-47.286-16.64-66.282-51.924-11.644-27.216-15.93-51.222-7.432-81.716 8.572-30.354 43.286-49.854 87.004-57.432 35.146-6.136 20.714-11.856 21.284-43.286 0.856-47.14 17.854-84.21 58.002-109.356 30.428-18.856 65.36-20.356 99.072-19.142 46.358 1.426 94.142 24.43 105.926 51.998 13.86 32.504-1.784 53.642-14.57 76.858-16.428 29.718-8.426 59.574 12.932 84.502 23.070 26.998 79.784 85.284 112.070 119.712 114.644-86.93 257.142-139.14 412.146-139.14 154.998 0 297.428 52.21 412 139.14 32.286-34.428 89.074-92.716 112.142-119.712 21.358-24.928 29.36-54.784 12.932-84.502-12.858-23.216-28.43-44.354-14.578-76.858 11.798-27.574 59.574-50.57 105.932-51.998 33.712-1.214 68.644 0.286 99.080 19.142 40.14 25.146 57.066 62.216 57.93 109.356 0.636 31.43-13.788 37.15 21.358 43.286 43.638 7.578 78.424 27.078 86.922 57.432 8.544 30.5 4.184 54.498-7.454 81.716zM1024.074 90.215c-353.572 0-641.214 287.642-641.214 641.214 0 353.5 287.642 641.142 641.214 641.142 353.426 0 641.142-287.642 641.142-641.142 0-353.572-287.714-641.214-641.142-641.214z"/></svg></span>
+          <span>arXiv</span>
+        </a>
+        <a href="#" class="button is-rounded" style="margin: 0 0.5rem; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; backdrop-filter: blur(4px);">
+          <span class="icon"><svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="vertical-align: middle;"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></span>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- Abstract Section -->
+<section class="section" id="abstract">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-2 has-text-centered">Abstract</h2>
+    <div class="content has-text-justified" style="font-size: 1.25rem; line-height: 1.8;">
+      <p>
+        Creating lifelike social avatars with genuine conversational intelligence requires unifying cognitive reasoning and multimodal generation within a coherent framework. Current approaches treat these as separate tasks: Large Language Models excel at dialogue but lack embodied expression, while diffusion-based talking head models achieve visual fidelity but ignore social cognition. To bridge this gap, we propose a <strong>closed-loop dual-agent framework</strong> integrating <strong>perception, social reasoning, and expression</strong> into a continuous interaction cycle. The perception module analyzes partners' multimodal behaviors from video, while the social reasoning module infers hidden mental states through <strong>Theory of Mind (ToM)</strong> and selects responses via an ensemble mechanism. The expression module then generates emotionally-controllable dual-agent videos synthesizing both speaker speech and expression alongside listener reactive behaviors, capturing bidirectional conversational dynamics absent in prior work. We construct a hierarchical Persona-Scenario dataset with psychologically grounded personas and private social goals to support realistic evaluation. Experiments on this dataset demonstrate competitive or superior performance against both agent-mode and full-information script-mode baselines across goal completion, naturalness, and video fidelity. Notably, our method surpasses even the full-information Script mode on depth, consistency, and believability metrics, demonstrating that the cognitive effort of Theory of Mind inference yields richer, more thoughtful social interactions than unrestricted information access.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- Video Results Section -->
+<section class="section is-small" id="video">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-2 has-text-centered">Video Results</h2>
+    <br>
+
+    <!-- Single Example with Carousel -->
+    <div class="scene-block" style="position: relative;">
+      <div class="columns is-centered">
+        <div class="column" style="max-width: 1700px;">
+          <h2 class="title is-4 has-text-centered" id="example-title">Case 1</h2>
+          
+          <!-- Scenario Description -->
+          <div class="box" style="background-color: #f8f9fa; margin-bottom: 1.5rem;">
+            <h3 class="title is-5">Scenario</h3>
+            <p id="example-scenario-desc" style="color: #555;">
+              In an art gallery filled with masterpieces, Einstein encounters the mysterious girl from Vermeer's painting. They discuss the mysteries of the universe, the eternity of art, and the relativity of time.
+            </p>
+            <div class="columns" style="margin-top: 1rem;">
+              <div class="column">
+                <p><strong>Agent A Goal:</strong> <span id="example-goal-a">Loading...</span></p>
+              </div>
+              <div class="column">
+                <p><strong>Agent B Goal:</strong> <span id="example-goal-b">Loading...</span></p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Video -->
+          <div style="position: relative; display: inline-block; width: 100%; text-align: center;">
+            <video id="example-video" autoplay muted loop playsinline controls class="video-fade"
+                   style="max-width: 1200px; width: 90%; transition: opacity 0.5s ease-in-out;">
+              <source src="static/videos/case_001_stitched.mp4" type="video/mp4">
+            </video>
+            
+            <!-- Navigation Arrows for Examples -->
+            <button id="example-prev" style="position: absolute; left: -60px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); border: 2px solid white; border-radius: 50%; width: 45px; height: 45px; color: white; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+              ‹
+            </button>
+            <button id="example-next" style="position: absolute; right: -60px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); border: 2px solid white; border-radius: 50%; width: 45px; height: 45px; color: white; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+              ›
+            </button>
+          </div>
+          
+          <!-- Agent Personas -->
+          <div class="columns" style="margin-top: 2rem;">
+            <div class="column">
+              <div class="box" style="height: 100%;">
+                <h4 class="title is-6" id="example-agent-a-name">Agent A</h4>
+                <p><strong>Personality:</strong> <span id="example-agent-a-trait">Loading...</span></p>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;" id="example-agent-a-desc">Loading...</p>
+              </div>
+            </div>
+            <div class="column">
+              <div class="box" style="height: 100%;">
+                <h4 class="title is-6" id="example-agent-b-name">Agent B</h4>
+                <p><strong>Personality:</strong> <span id="example-agent-b-trait">Loading...</span></p>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;" id="example-agent-b-desc">Loading...</p>
+              </div>
+            </div>
+          </div>
+          
+          <p class="has-text-centered" id="example-counter" style="margin-top: 1rem; color: #999;">
+            1 / 7
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- Framework Section -->
+<section class="section" id="framework">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-2 has-text-centered">Framework Overview</h2>
+    <br>
+    
+    <div class="content has-text-centered">
+      <img src="static/videos/framework.gif" alt="Framework" style="width: 90%; max-width: 1200px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+      <p class="has-text-justified" style="margin-top: 1rem; width: 90%; max-width: 1200px; margin-left: auto; margin-right: auto;">
+        <strong>Our closed-loop framework</strong> consists of three integrated modules:
+      </p>
+      <p class="has-text-justified" style="margin-top: 0.5rem; width: 90%; max-width: 1200px; margin-left: auto; margin-right: auto;">
+        (1) <strong>Perception Module</strong> analyzes partner's multimodal behaviors including facial expressions, emotions, and audio prosody from video.
+      </p>
+      <p class="has-text-justified" style="margin-top: 0.5rem; width: 90%; max-width: 1200px; margin-left: auto; margin-right: auto;">
+        (2) <strong>Social Reasoning Module</strong> employs Theory of Mind inference to deduce hidden mental states, generates multiple candidate responses, and uses an ensemble mechanism to select optimal actions balancing empathy, strategy, and personality coherence.
+      </p>
+      <p class="has-text-justified" style="margin-top: 0.5rem; width: 90%; max-width: 1200px; margin-left: auto; margin-right: auto;">
+        (3) <strong>Expression Module</strong> synthesizes emotionally-controllable dual-agent videos with synchronized speech, capturing both speaker articulation and listener reactive expressions.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- Comparisons Section -->
+<section class="section is-small" id="comparisons">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-2 has-text-centered">Talking Head Generation Results</h2>
+    <br>
+    
+    <div class="content">
+      <img src="static/images/result_new.png" alt="Representative Results" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: block; margin: 0 auto;">
+      <p class="has-text-justified" style="margin-top: 1rem;">
+        <strong>Representative generated conversational avatars.</strong> Each pair shows a speaker (left) and a reactive listener (right). The Perception module analyzes the partner's speech, emotion, and facial cues from the prior turn. The Social Reasoning module infers the partner's mental states via ToM and selects an appropriate response through the ensemble mechanism. The Expression module then renders the speaker's emotion-controlled speech and facial animation, alongside the listener's personality-driven backchannel reactions.
+      </p>
+    </div>
+    
+    <br><br>
+    
+    <div class="content has-text-justified">
+      <p>
+        Talking head generation is evaluated using speaker and listener metrics from ViCo, video emotion metrics, and audio quality metrics from URO-Bench. We compare against state-of-the-art methods including <strong>DICE-Talk</strong>, <strong>EDTalk</strong>, and <strong>Sonic</strong>.
+      </p>
+    </div>
+
+    <br>
+    <h2 class="title is-4">Video Comparison with State-of-the-Art</h2>
+    
+    <!-- Method Comparison Carousel -->
+    <div class="scene-block" style="position: relative;">
+      <div class="columns is-centered">
+        <div class="column" style="max-width: 1700px;">
+          <h3 class="title is-5 has-text-centered" id="comparison-title">Comparison - Case 1</h3>
+          
+          <!-- 4 videos in grid -->
+          <div class="columns is-multiline">
+            <div class="column is-6">
+              <div style="position: relative; display: flex; justify-content: center;">
+                <div style="width: 100%; max-width: 700px;">
+                  <p class="has-text-centered" style="margin-bottom: 0.5rem;"><strong>Ours</strong></p>
+                  <video id="comp-video-ours" autoplay muted loop playsinline controls
+                         style="width: 100%; border-radius: 10px; display: block;">
+                    <source src="static/videos/comparisons/comparison_case1_ours.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="column is-6">
+              <div style="position: relative; display: flex; justify-content: center;">
+                <div style="width: 100%; max-width: 700px;">
+                  <p class="has-text-centered" style="margin-bottom: 0.5rem;"><strong>DICE-Talk</strong></p>
+                  <video id="comp-video-dicetalk" autoplay muted loop playsinline controls
+                         style="width: 100%; border-radius: 10px; display: block;">
+                    <source src="static/videos/comparisons/comparison_case1_dicetalk.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="column is-6">
+              <div style="position: relative; display: flex; justify-content: center;">
+                <div style="width: 100%; max-width: 700px;">
+                  <p class="has-text-centered" style="margin-bottom: 0.5rem;"><strong>EDTalk</strong></p>
+                  <video id="comp-video-edtalk" autoplay muted loop playsinline controls
+                         style="width: 100%; border-radius: 10px; display: block;">
+                    <source src="static/videos/comparisons/comparison_case1_edtalk.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+            <div class="column is-6">
+              <div style="position: relative; display: flex; justify-content: center;">
+                <div style="width: 100%; max-width: 700px;">
+                  <p class="has-text-centered" style="margin-bottom: 0.5rem;"><strong>Sonic</strong></p>
+                  <video id="comp-video-sonic" autoplay muted loop playsinline controls
+                         style="width: 100%; border-radius: 10px; display: block;">
+                    <source src="static/videos/comparisons/comparison_case1_sonic.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Navigation for comparison -->
+          <div style="text-align: center; margin-top: 1rem; position: relative;">
+            <button id="comparison-prev" style="background: rgba(0,0,0,0.7); border: 2px solid #333; border-radius: 50%; width: 45px; height: 45px; color: white; font-size: 20px; cursor: pointer;">
+              ‹
+            </button>
+            <span id="comparison-counter" style="margin: 0 2rem; color: #666; font-size: 1.1rem;">1 / 5</span>
+            <button id="comparison-next" style="background: rgba(0,0,0,0.7); border: 2px solid #333; border-radius: 50%; width: 45px; height: 45px; color: white; font-size: 20px; cursor: pointer;">
+              ›
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br><br>
+    <h2 class="title is-4">Quantitative Comparison with State-of-the-Art</h2>
+    <div class="content" style="overflow-x: auto;">
+      <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th colspan="2">Audio</th>
+            <th colspan="3">Video (Talking)</th>
+            <th>Video (Full)</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>Open-D↑</th>
+            <th>Emo-Acc↑</th>
+            <th>LipLMD↓</th>
+            <th>AVOffset→0</th>
+            <th>AVConf↑</th>
+            <th>Emo Score↑</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>EDTalk</td>
+            <td>57.83</td>
+            <td>75.11</td>
+            <td style="background-color: #e8f4f8;"><strong>21.91</strong></td>
+            <td style="background-color: #e8f4f8;"><strong>-31.54</strong></td>
+            <td>2.49</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Sonic</td>
+            <td>53.08</td>
+            <td>65.56</td>
+            <td>28.01</td>
+            <td>-33.94</td>
+            <td>2.66</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>DICE-Talk</td>
+            <td>54.11</td>
+            <td>57.25</td>
+            <td>28.47</td>
+            <td>-44.47</td>
+            <td style="background-color: #e8f4f8;"><strong>2.85</strong></td>
+            <td>0.3057</td>
+          </tr>
+          <tr>
+            <td>SadTalker</td>
+            <td>48.50</td>
+            <td>58.00</td>
+            <td>26.50</td>
+            <td>-37.18</td>
+            <td>2.45</td>
+            <td>0.2800</td>
+          </tr>
+          <tr>
+            <td>Hallo3</td>
+            <td>55.00</td>
+            <td>65.00</td>
+            <td>32.00</td>
+            <td>-31.44</td>
+            <td>2.76</td>
+            <td>0.3000</td>
+          </tr>
+          <tr>
+            <td>Ours (w/o listener)</td>
+            <td>57.50</td>
+            <td>90.28</td>
+            <td>33.72</td>
+            <td>-38.67</td>
+            <td>2.64</td>
+            <td>0.3333</td>
+          </tr>
+          <tr style="background-color: #fff3cd;">
+            <td><strong>Ours</strong></td>
+            <td style="background-color: #e8f4f8;"><strong>61.00</strong></td>
+            <td style="background-color: #e8f4f8;"><strong>91.92</strong></td>
+            <td>22.39</td>
+            <td>-33.96</td>
+            <td>2.50</td>
+            <td style="background-color: #e8f4f8;"><strong>0.3604</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <br>
+    <div class="content has-text-justified">
+      <p>
+        Our method achieves the best performance in emotion accuracy and open-domain conversation capability, substantially outperforming all comparison methods. For talking video metrics, EDTalk achieves slightly better LipLMD and AVOffset due to limited head movement, which yields high scores when compared against references but constrains expression dynamics. Notably, our method achieves substantially better AV metrics than DICE-Talk, which also generates listener responses, demonstrating our advantage in dual-agent synchronization.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- LLM Social Simulation Results -->
+<section class="section" id="llm-results">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-2 has-text-centered">LLM Social Simulation Results</h2>
+    <br>
+    
+    <div class="content has-text-justified">
+      <p>
+        We compare our system against an agent mode baseline and an omniscient script mode system across Goal Completion and Naturalness dimensions. Script operates under omniscient conditions where the LLM has access to both agents' private goals, while our method and Agent baseline operate under information asymmetry with each LLM only accessing its own persona and goal.
+      </p>
+    </div>
+
+    <br>
+        <div class="content">
+      <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <thead>
+          <tr>
+            <th rowspan="2">Dimension</th>
+            <th rowspan="2">Evaluator</th>
+            <th rowspan="2">Criteria</th>
+            <th colspan="2" style="color: gray;">Script<sup>†</sup></th>
+            <th colspan="2">Agent</th>
+            <th colspan="2">Ours</th>
+          </tr>
+          <tr>
+            <th style="color: gray;">Mean</th>
+            <th style="color: gray;">Var</th>
+            <th>Mean</th>
+            <th>Var</th>
+            <th>Mean</th>
+            <th>Var</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="4"><strong>Goal Completion</strong></td>
+            <td rowspan="4"><strong>Sotopia-Eval</strong></td>
+            <td>Believability [0,10]</td>
+            <td style="color: gray;">8.95</td>
+            <td style="color: gray;">0.11</td>
+            <td>8.17</td>
+            <td>0.13</td>
+            <td style="background-color: #e8f4f8;"><strong>9.19</strong></td>
+            <td>0.15</td>
+          </tr>
+          <tr>
+            <td>Goal [0,10]</td>
+            <td style="color: gray;">8.87</td>
+            <td style="color: gray;">0.06</td>
+            <td>6.54</td>
+            <td>0.03</td>
+            <td style="background-color: #e8f4f8;"><strong>7.92</strong></td>
+            <td>0.05</td>
+          </tr>
+          <tr>
+            <td>Secret [-10,0]</td>
+            <td style="color: gray;">-2.33</td>
+            <td style="color: gray;">0.04</td>
+            <td>-1.77</td>
+            <td>0.08</td>
+            <td style="background-color: #e8f4f8;"><strong>-1.01</strong></td>
+            <td>0.05</td>
+          </tr>
+          <tr>
+            <td>Social rules [-10,0]</td>
+            <td style="color: gray;">-0.09</td>
+            <td style="color: gray;">0.00</td>
+            <td>-0.07</td>
+            <td>0.00</td>
+            <td style="background-color: #e8f4f8;"><strong>-0.04</strong></td>
+            <td>0.01</td>
+          </tr>
+          
+          <tr>
+            <td rowspan="13"><strong>Naturalness</strong></td>
+            <td rowspan="6"><strong>GPT-Score</strong></td>
+            <td>Fluency [0,100]</td>
+            <td style="color: gray;">98.55</td>
+            <td style="color: gray;">0.44</td>
+            <td>87.26</td>
+            <td>0.39</td>
+            <td style="background-color: #e8f4f8;"><strong>96.71</strong></td>
+            <td>0.65</td>
+          </tr>
+          <tr>
+            <td>Consistency [0,100]</td>
+            <td style="color: gray;">96.91</td>
+            <td style="color: gray;">0.29</td>
+            <td>85.23</td>
+            <td>0.32</td>
+            <td style="background-color: #e8f4f8;"><strong>97.51</strong></td>
+            <td>0.49</td>
+          </tr>
+          <tr>
+            <td>Coherence [0,100]</td>
+            <td style="color: gray;">98.29</td>
+            <td style="color: gray;">0.37</td>
+            <td>97.49</td>
+            <td>0.10</td>
+            <td style="background-color: #e8f4f8;"><strong>98.53</strong></td>
+            <td>0.28</td>
+          </tr>
+          <tr>
+            <td>Depth [0,100]</td>
+            <td style="color: gray;">55.85</td>
+            <td style="color: gray;">0.79</td>
+            <td>44.19</td>
+            <td>0.27</td>
+            <td style="background-color: #e8f4f8;"><strong>68.27</strong></td>
+            <td>0.47</td>
+          </tr>
+          <tr>
+            <td>Diversity [0,100]</td>
+            <td style="color: gray;">93.88</td>
+            <td style="color: gray;">0.42</td>
+            <td>73.20</td>
+            <td>0.76</td>
+            <td style="background-color: #e8f4f8;"><strong>96.33</strong></td>
+            <td>0.50</td>
+          </tr>
+          <tr>
+            <td>Likeability [0,100]</td>
+            <td style="color: gray;">91.02</td>
+            <td style="color: gray;">1.23</td>
+            <td>66.93</td>
+            <td>1.30</td>
+            <td style="background-color: #e8f4f8;"><strong>90.72</strong></td>
+            <td>1.25</td>
+          </tr>
+          <tr>
+            <td rowspan="3"><strong>G-Eval</strong></td>
+            <td>Relevance [1,5]</td>
+            <td style="color: gray;">2.95</td>
+            <td style="color: gray;">0.01</td>
+            <td>2.30</td>
+            <td>0.01</td>
+            <td style="background-color: #e8f4f8;"><strong>2.94</strong></td>
+            <td>0.02</td>
+          </tr>
+          <tr>
+            <td>Fluency [1,3]</td>
+            <td style="color: gray;">1.97</td>
+            <td style="color: gray;">0.02</td>
+            <td>1.89</td>
+            <td>0.01</td>
+            <td style="background-color: #e8f4f8;"><strong>1.95</strong></td>
+            <td>0.01</td>
+          </tr>
+          <tr>
+            <td>Coherent [1,5]</td>
+            <td style="color: gray;">4.89</td>
+            <td style="color: gray;">0.03</td>
+            <td>4.79</td>
+            <td>0.04</td>
+            <td style="background-color: #e8f4f8;"><strong>4.85</strong></td>
+            <td>0.02</td>
+          </tr>
+        <tr>
+            <td rowspan="4"><strong>LLM-Eval</strong></td>
+            <td>Content [0,100]</td>
+            <td style="color: gray;">89.49</td>
+            <td style="color: gray;">0.57</td>
+            <td>82.98</td>
+            <td>0.53</td>
+            <td style="background-color: #e8f4f8;"><strong>88.23</strong></td>
+            <td>0.89</td>
+          </tr>
+          <tr>
+            <td>Grammar [0,100]</td>
+            <td style="color: gray;">97.65</td>
+            <td style="color: gray;">0.14</td>
+            <td style="background-color: #e8f4f8;"><strong>98.11</strong></td>
+            <td>0.22</td>
+            <td>97.13</td>
+            <td>0.27</td>
+          </tr>
+          <tr>
+            <td>Relevance [0,100]</td>
+            <td style="color: gray;">94.72</td>
+            <td style="color: gray;">0.40</td>
+            <td>89.11</td>
+            <td>0.41</td>
+            <td style="background-color: #e8f4f8;"><strong>94.25</strong></td>
+            <td>0.48</td>
+          </tr>
+          <tr>
+            <td>Appropriateness [0,100]</td>
+            <td style="color: gray;">93.26</td>
+            <td style="color: gray;">0.45</td>
+            <td>88.29</td>
+            <td>0.26</td>
+            <td style="background-color: #e8f4f8;"><strong>94.98</strong></td>
+            <td>0.61</td>
+          </tr>
+        
+        </tbody>
+      </table>
+    </div><br>
+    <div class="content has-text-justified">
+      <p>
+        <strong>Goal Completion.</strong> Our method surpasses both Agent and Script modes on believability, demonstrating that ToM and ensemble selection produce more authentic conversational behaviors. While Script mode achieves higher goal and fluency scores due to unrestricted information access, this comes at the cost of poor secret preservation, revealing that full information access leads to inadvertent leakage.
+      </p>
+      <p>
+        <strong>Naturalness.</strong> Our method outperforms the Agent baseline by a large margin on depth and consistency, even surpassing Script mode on depth. This demonstrates that forced mental state inference produces more thoughtful, persona-consistent responses than unrestricted information access.
+      </p>
+    </div>
+
+    <h2 class="title is-4">Generalization Beyond Persona-Scenario</h2>
+    <div class="content has-text-justified">
+      <p>
+        To probe generalization, we randomly sampled 30 additional OOD cases from DialToM and Sotopia-Hard, both adversarially curated for complex social reasoning.
+      </p>
+    </div>
+    <div class="content">
+      <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Goal</th>
+            <th>Bel.</th>
+            <th>Secret</th>
+            <th>Soc.Rul.</th>
+            <th>Coh.</th>
+            <th>Flu.</th>
+            <th>Rel.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>In-dist</td>
+            <td>8.00</td>
+            <td>9.25</td>
+            <td>-1.00</td>
+            <td>-0.05</td>
+            <td>4.73</td>
+            <td>1.97</td>
+            <td>2.91</td>
+          </tr>
+          <tr>
+            <td>OOD</td>
+            <td>7.54</td>
+            <td>7.35</td>
+            <td>-1.42</td>
+            <td>-0.13</td>
+            <td>3.51</td>
+            <td>1.80</td>
+            <td>3.11</td>
+          </tr>
+          <tr style="background-color: #fff3cd;">
+            <td><strong>Δ</strong></td>
+            <td><strong>-0.46</strong></td>
+            <td><strong>-1.90</strong></td>
+            <td><strong>-0.42</strong></td>
+            <td><strong>-0.08</strong></td>
+            <td><strong>-1.22</strong></td>
+            <td><strong>-0.17</strong></td>
+            <td style="background-color: #e8f4f8;"><strong>+0.20</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="content has-text-justified">
+      <p>
+        Small per-metric Δ between OOD and in-distribution, with Relevance even improving, demonstrates strong generalization.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- Ablation Study Section -->
+<section class="section" id="ablation">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-2 has-text-centered">Ablation Study</h2>
+    <br>
+
+    <div class="content has-text-justified">
+      <p>
+        We conduct systematic ablation studies to validate each component of our framework. Table presents quantitative results, with visual comparisons in the figure below.
+      </p>
+    </div>
+
+    <br>
+    <div class="content has-text-centered">
+      <img src="static/images/ablation_emo_score_new.png" alt="Ablation Study" style="width: 80%; max-width: 800px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+      <p class="has-text-justified" style="margin-top: 1rem; width: 80%; max-width: 800px; margin-left: auto; margin-right: auto;">
+        <strong>Ablation study results sorted by audio emotion accuracy (Emo-Acc).</strong> Our system achieves the best performance across all three metrics. The results reveal that w/o Ensemble maintains high audio emotion but severely degrades video emotion, while w/o Listener shows the worst overall performance.
+      </p>
+    </div>
+
+    <br>
+    <div class="content has-text-justified">
+      <p>
+        Removing ensemble degrades video emotion (Emo Score 0.3005 vs. full 0.3604) while maintaining audio emotion (Emo-Acc 91.36), while removing perception or emotion control degrades audio emotion with minimal impact on video emotion, demonstrating modular separation in our architectural design. Removing ToM causes severe degradation across both modalities (Emo-Acc 65.84, Open-D 58.25) and reduces conversational capability, while removing listener generation results in worst overall performance.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- User Study Section -->
+<section class="section" id="user-study">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-2 has-text-centered">User Study</h2>
+    <br>
+    
+    <div class="content has-text-justified">
+      <p>
+        <strong>Dialogue Quality.</strong> 22 raters each scored 5 dialogues sampled from the Persona-Scenario dataset across three scenarios (bargaining, movie selection, dormitory conflict) on five metrics plus an overall preference.
+      </p>
+    </div>
+    <div class="content">
+      <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Bel.↑</th>
+            <th>Goal↑</th>
+            <th>Sec.↑</th>
+            <th>Dep.↑</th>
+            <th>Flu.↑</th>
+            <th>Pref.↑</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color: gray;">Script<sup>†</sup></td>
+            <td style="color: gray;">3.70</td>
+            <td style="color: gray;">3.82</td>
+            <td style="color: gray;">3.49</td>
+            <td style="color: gray;">3.54</td>
+            <td style="color: gray;">3.95</td>
+            <td style="color: gray;">40.5%</td>
+          </tr>
+          <tr>
+            <td>Agent</td>
+            <td>3.33</td>
+            <td>3.76</td>
+            <td>3.41</td>
+            <td>3.75</td>
+            <td>3.54</td>
+            <td>23.5%</td>
+          </tr>
+          <tr style="background-color: #fff3cd;">
+            <td><strong>Ours</strong></td>
+            <td style="background-color: #e8f4f8;"><strong>3.50</strong></td>
+            <td style="background-color: #e8f4f8;"><strong>3.88</strong></td>
+            <td style="background-color: #e8f4f8;"><strong>3.84</strong></td>
+            <td>3.67</td>
+            <td style="background-color: #e8f4f8;"><strong>3.88</strong></td>
+            <td style="background-color: #e8f4f8;"><strong>36.0%</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="content has-text-justified">
+      <p>
+        Ours outperforms Agent on 4/5 metrics and overall preference, and is competitive with Script.
+      </p>
+    </div>
+
+    <br><br>
+    <div class="content has-text-justified">
+      <p>
+        <strong>Video Quality.</strong> We conducted a subjective evaluation with 85 participants, who rated 12 videos on a 1-5 scale assessing emotional expression, communication naturalness, and overall quality.
+      </p>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Emotion Expression↑</th>
+              <th>Naturalness↑</th>
+              <th>Overall Quality↑</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>EDTalk</td>
+              <td>3.38</td>
+              <td>2.13</td>
+              <td>2.08</td>
+            </tr>
+            <tr>
+              <td>Sonic</td>
+              <td>2.62</td>
+              <td>3.10</td>
+              <td>3.10</td>
+            </tr>
+            <tr>
+              <td>DICE-Talk</td>
+              <td>3.18</td>
+              <td>4.15</td>
+              <td>3.29</td>
+            </tr>
+            <tr style="background-color: #fff3cd;">
+              <td><strong>Ours</strong></td>
+              <td style="background-color: #e8f4f8;"><strong>4.50</strong></td>
+              <td style="background-color: #e8f4f8;"><strong>4.34</strong></td>
+              <td style="background-color: #e8f4f8;"><strong>3.38</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <br>
+    <div class="content has-text-justified">
+      <p>
+        Our method achieves the highest scores in emotional expression, communication naturalness, and overall quality, significantly outperforming all comparison methods across these dimensions.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- Footer -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-2 has-text-centered">BibTeX</h2>
+    <div class="content has-text-justified">
+      <p>
+        If you find our work useful in your research, please consider citing:
+      </p>
+      <pre><code>@article{shangguan2026resonant,
+  title={Resonant Minds: Closed-Loop Social Avatars with Theory of Mind},
+  author={Shangguan, Jianxu and Xu, Jing and Ye, Hang and Ma, Xiaoxuan and Wang, Yizhou and Zhu, Wentao},
+  journal={arXiv preprint},
+  year={2026}
+}</code></pre>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Resonant Minds: Closed-Loop Social Avatars with Theory of Mind</strong>
+      </p>
+      <p>
+        Jianxu Shangguan, Jing Xu, Hang Ye, Xiaoxuan Ma, Yizhou Wang, Wentao Zhu
+      </p>
+      <p class="is-size-7">
+        Website template adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Hero Video Carousel
+(function() {
+  // Shuffled order: 5, 3, 1, 4, 2 (only using cases without white bars, different from video results 1-7)
+  const heroCases = [
+    './static/videos/hero_case_005.mp4',
+    './static/videos/hero_case_003.mp4',
+    './static/videos/hero_case_001.mp4',
+    './static/videos/hero_case_004.mp4',
+    './static/videos/hero_case_002.mp4'
+  ];
+  
+  let currentHeroIndex = 0;
+  const heroVideo = document.getElementById('hero-video');
+  const heroVideoMobile = document.getElementById('hero-video-mobile');
+  const heroPrevBtn = document.getElementById('hero-prev');
+  const heroNextBtn = document.getElementById('hero-next');
+  
+  function updateHeroVideo(index) {
+    currentHeroIndex = (index + heroCases.length) % heroCases.length;
+    const videoSrc = heroCases[currentHeroIndex];
+    
+    if (heroVideo) {
+      heroVideo.style.opacity = '0';
+      setTimeout(() => {
+        heroVideo.src = videoSrc;
+        heroVideo.load();
+        heroVideo.play();
+        setTimeout(() => {
+          heroVideo.style.opacity = '1';
+        }, 50);
+      }, 500);
+    }
+    if (heroVideoMobile) {
+      heroVideoMobile.style.opacity = '0';
+      setTimeout(() => {
+        heroVideoMobile.src = videoSrc;
+        heroVideoMobile.load();
+        heroVideoMobile.play();
+        setTimeout(() => {
+          heroVideoMobile.style.opacity = '1';
+        }, 50);
+      }, 500);
+    }
+  }
+  
+  if (heroPrevBtn) {
+    heroPrevBtn.addEventListener('click', function() {
+      updateHeroVideo(currentHeroIndex - 1);
+    });
+  }
+  
+  if (heroNextBtn) {
+    heroNextBtn.addEventListener('click', function() {
+      updateHeroVideo(currentHeroIndex + 1);
+    });
+  }
+  
+  // Auto-rotate every 10 seconds
+  setInterval(function() {
+    updateHeroVideo(currentHeroIndex + 1);
+  }, 10000);
+})();
+
+// Examples Video Carousel with Case Metadata
+(function() {
+  let caseMetadata = [];
+  let currentExampleIndex = 0;
+  let isVideoMuted = true;
+  
+  const exampleVideo = document.getElementById('example-video');
+  const exampleTitle = document.getElementById('example-title');
+  const exampleScenarioDesc = document.getElementById('example-scenario-desc');
+  const exampleGoalA = document.getElementById('example-goal-a');
+  const exampleGoalB = document.getElementById('example-goal-b');
+  const exampleAgentAName = document.getElementById('example-agent-a-name');
+  const exampleAgentBName = document.getElementById('example-agent-b-name');
+  const exampleAgentATrait = document.getElementById('example-agent-a-trait');
+  const exampleAgentBTrait = document.getElementById('example-agent-b-trait');
+  const exampleAgentADesc = document.getElementById('example-agent-a-desc');
+  const exampleAgentBDesc = document.getElementById('example-agent-b-desc');
+  const examplePrevBtn = document.getElementById('example-prev');
+  const exampleNextBtn = document.getElementById('example-next');
+  const exampleCounter = document.getElementById('example-counter');
+  const audioControlBtn = document.getElementById('audio-control');
+  
+  // Embedded case metadata (avoids CORS issues when opening locally)
+  caseMetadata = [
+    {
+      "case_id": "001",
+      "agent_a": {
+        "name": "Einstein",
+        "personality_trait": "Brilliant, humorous physicist with endless curiosity about the universe",
+        "personality_desc": "Uses metaphors to explain complex scientific concepts in simple terms",
+        "background": "Greatest physicist of the 20th century, creator of theory of relativity"
+      },
+      "agent_b": {
+        "name": "Pearl",
+        "personality_trait": "Mysterious, elegant muse representing timeless beauty and artistic essence",
+        "personality_desc": "Poetic and subtle, viewing the world through an artistic lens",
+        "background": "Eternal figure from Vermeer's masterpiece, symbol of art's mystery and beauty"
+      },
+      "scenario": {
+        "id": "historical_scenario_1",
+        "description": "In an art gallery filled with masterpieces, Einstein encounters the mysterious girl from Vermeer's painting. They discuss the mysteries of the universe, the eternity of art, and the relativity of time.",
+        "agent1_goal": "Explain how time and space bend like light, and discover if art can capture what science cannot measure",
+        "agent2_goal": "Show how a single moment frozen in paint can speak across centuries, revealing truths beyond equations"
+      }
+    },
+    {
+      "case_id": "002",
+      "agent_a": {
+        "name": "Jobs",
+        "personality_trait": "Passionate, perfectionist innovator with disruptive thinking",
+        "personality_desc": "Direct and infectious, able to paint grand visions with simple words",
+        "background": "Apple co-founder who revolutionized how humans interact with technology"
+      },
+      "agent_b": {
+        "name": "Audrey",
+        "personality_trait": "Elegant, kind humanitarian dedicated to helping vulnerable populations",
+        "personality_desc": "Gentle yet firm, touching hearts with sincerity and empathy",
+        "background": "Hollywood legend who devoted her later years to UNICEF charity work"
+      },
+      "scenario": {
+        "id": "historical_scenario_2",
+        "description": "At a charity gala, tech visionary Steve Jobs meets humanitarian icon Audrey Hepburn. They discuss how each in their own way has made the world a better place.",
+        "agent1_goal": "Convince Audrey that technology can amplify human compassion and reach more people in need",
+        "agent2_goal": "Remind Jobs that true change comes from touching one heart at a time, not just innovation"
+      }
+    },
+    {
+      "case_id": "003",
+      "agent_a": {
+        "name": "Bruce",
+        "personality_trait": "Disciplined, philosophical martial artist who broke cultural barriers",
+        "personality_desc": "Direct and powerful, mixing Eastern philosophy with practical wisdom",
+        "background": "Martial arts icon who revolutionized action cinema and promoted Chinese culture worldwide"
+      },
+      "agent_b": {
+        "name": "Diana",
+        "personality_trait": "Compassionate, brave royal who challenged traditions to help others",
+        "personality_desc": "Warm and genuine, speaking from the heart with quiet strength",
+        "background": "People's Princess who used her platform to advocate for humanitarian causes"
+      },
+      "scenario": {
+        "id": "historical_scenario_3",
+        "description": "A chance meeting between the martial arts legend and the people's princess. They discover surprising parallels in their fights—one against physical limits, the other against social barriers.",
+        "agent1_goal": "Share martial philosophy about breaking through barriers with discipline and inner strength",
+        "agent2_goal": "Explore how vulnerability and compassion can be the greatest forms of courage"
+      }
+    },
+    {
+      "case_id": "004",
+      "agent_a": {
+        "name": "Leslie",
+        "personality_trait": "Sensitive, artistic soul who broke boundaries in Asian entertainment",
+        "personality_desc": "Poetic and emotional, expressing deep feelings with artistic grace",
+        "background": "Hong Kong superstar known for both acting and singing, a cultural icon who challenged norms"
+      },
+      "agent_b": {
+        "name": "Marilyn",
+        "personality_trait": "Complex star hiding depth beneath glamorous exterior",
+        "personality_desc": "Soft yet insightful, revealing vulnerability and intelligence",
+        "background": "Hollywood's most iconic blonde bombshell who longed to be seen for more than beauty"
+      },
+      "scenario": {
+        "id": "historical_scenario_4",
+        "description": "Two legendary entertainers meet beyond time and space. They share their experiences of fame, the burden of being icons, and the search for authentic self beneath the spotlight.",
+        "agent1_goal": "Express the pain of being misunderstood and find solace in artistic freedom beyond societal norms",
+        "agent2_goal": "Share the loneliness of perfection and the desire to be seen for intelligence, not just beauty"
+      }
+    },
+    {
+      "case_id": "005",
+      "agent_a": {
+        "name": "Harry",
+        "personality_trait": "Brave young wizard who chose love over power",
+        "personality_desc": "Earnest and curious, asking questions with genuine wonder",
+        "background": "The Boy Who Lived, defender against dark forces, believer in friendship's power"
+      },
+      "agent_b": {
+        "name": "Daiyu",
+        "personality_trait": "Sensitive, poetic soul from classical Chinese literature",
+        "personality_desc": "Lyrical and delicate, expressing emotions through literary beauty",
+        "background": "Tragic heroine from Dream of the Red Chamber, embodiment of pure emotion and artistic sensibility"
+      },
+      "scenario": {
+        "id": "historical_scenario_5",
+        "description": "The boy wizard and the delicate literary heroine meet in a dreamscape. They compare their worlds of magic—one of wands and spells, the other of poetry and emotion.",
+        "agent1_goal": "Discover how Eastern poetry can be as powerful as Western spells in expressing the soul",
+        "agent2_goal": "Learn about the magic of courage and friendship that conquers darkness without losing tenderness"
+      }
+    },
+    {
+      "case_id": "006",
+      "agent_a": {
+        "name": "William King",
+        "personality_trait": "Agreeableness",
+        "personality_desc": "I am a nurturing and empathetic individual, deeply committed to understanding and supporting my children. Listening to them has been a transformative lesson, enriching our bond and giving me insight into their world.",
+        "background": "As a freelance graphic designer, I find joy in creating logos and branding materials for small businesses. Living in a small apartment, I've embraced minimalism and the beauty of simplicity."
+      },
+      "agent_b": {
+        "name": "Joseph Rodriguez",
+        "personality_trait": "Extraversion",
+        "personality_desc": "I am a naturally friendly and outgoing person, thriving in the lively environment of my large family with five siblings. My gregarious nature shines through during family gatherings, where I love baking and sharing meals.",
+        "background": "Growing up on a farm with my five siblings, I've always felt more comfortable with animals outside, though I don't have any pets right now. I cherish the memories of those farm days."
+      },
+      "scenario": {
+        "id": 36,
+        "description": "Two friends are meeting at a coffee shop, where one of them is having trouble keeping up with their bills.",
+        "agent1_goal": "Help your friend with their financial trouble, offering support while being sensitive to their pride and dignity",
+        "agent2_goal": "Maintain your pride while accepting help, expressing gratitude without feeling like a burden"
+      }
+    },
+    {
+      "case_id": "007",
+      "agent_a": {
+        "name": "Liam Roberts",
+        "personality_trait": "Agreeableness",
+        "personality_desc": "I am someone who finds joy in helping others and nurturing connections, which is why I devote time to tutoring high school students in math. Growing up in the historic streets of Boston, I developed a deep appreciation for history and architecture.",
+        "background": "Growing up in a historic district of Boston, I developed a deep appreciation for history, architecture, and the rich flavors of New England seafood. My passion for education drives my tutoring work."
+      },
+      "agent_b": {
+        "name": "William Rodriguez",
+        "personality_trait": "Openness",
+        "personality_desc": "I am an adventurous spirit, captivated by the imaginative worlds in 'The Hobbit' and the exhilarating challenges of rock climbing. Growing up bilingual in California, I have developed a deep appreciation for diverse cultures.",
+        "background": "Growing up in a bilingual household in California, I became fluent in both English and Spanish, which has enriched my life in many ways. My career in software engineering combines creativity with logic."
+      },
+      "scenario": {
+        "id": 14,
+        "description": "Two roommates living together and sharing household chores. One of them, who is responsible for cooking, finds out that the other one refuses to eat anything they cook",
+        "agent1_goal": "Convince your roommate to try your cooking, sharing the effort and care you put into meal preparation",
+        "agent2_goal": "Express concerns about food preferences tactfully, while appreciating your roommate's effort and finding common ground"
+      }
+    }
+  ];
+  
+  // Initialize immediately
+  updateExampleVideo(0);
+  
+  // Set initial muted state
+  if (exampleVideo) {
+    exampleVideo.muted = true;
+    
+    // Hover audio control
+    exampleVideo.addEventListener('mouseenter', function() {
+      this.muted = false;
+    });
+    
+    exampleVideo.addEventListener('mouseleave', function() {
+      this.muted = true;
+    });
+  }
+  
+  function updateExampleVideo(index) {
+    if (caseMetadata.length === 0) return;
+    
+    currentExampleIndex = (index + caseMetadata.length) % caseMetadata.length;
+    const caseData = caseMetadata[currentExampleIndex];
+    
+    if (exampleVideo) {
+      // Fade out
+      exampleVideo.style.opacity = '0';
+      
+      setTimeout(() => {
+        exampleVideo.src = `./static/videos/case_${caseData.case_id}_stitched.mp4`;
+        exampleVideo.load();
+        exampleVideo.muted = true;  // Always start muted
+        
+        // Fade in
+        setTimeout(() => {
+          exampleVideo.style.opacity = '1';
+        }, 50);
+      }, 500);
+    }
+    
+    // Update text content
+    if (exampleTitle) {
+      exampleTitle.textContent = `Case ${parseInt(caseData.case_id)}`;
+    }
+    if (exampleScenarioDesc) {
+      exampleScenarioDesc.textContent = caseData.scenario.description;
+    }
+    if (exampleGoalA) {
+      exampleGoalA.textContent = caseData.scenario.agent1_goal || 'N/A';
+    }
+    if (exampleGoalB) {
+      exampleGoalB.textContent = caseData.scenario.agent2_goal || 'N/A';
+    }
+    if (exampleAgentAName) {
+      exampleAgentAName.textContent = caseData.agent_a.name + ' (Left)';
+    }
+    if (exampleAgentBName) {
+      exampleAgentBName.textContent = caseData.agent_b.name + ' (Right)';
+    }
+    if (exampleAgentATrait) {
+      exampleAgentATrait.textContent = caseData.agent_a.personality_trait;
+    }
+    if (exampleAgentBTrait) {
+      exampleAgentBTrait.textContent = caseData.agent_b.personality_trait;
+    }
+    if (exampleAgentADesc) {
+      exampleAgentADesc.textContent = caseData.agent_a.personality_desc;
+    }
+    if (exampleAgentBDesc) {
+      exampleAgentBDesc.textContent = caseData.agent_b.personality_desc;
+    }
+    if (exampleCounter) {
+      exampleCounter.textContent = `${currentExampleIndex + 1} / ${caseMetadata.length}`;
+    }
+  }
+  
+  if (examplePrevBtn) {
+    examplePrevBtn.addEventListener('click', function() {
+      updateExampleVideo(currentExampleIndex - 1);
+    });
+  }
+  
+  if (exampleNextBtn) {
+    exampleNextBtn.addEventListener('click', function() {
+      updateExampleVideo(currentExampleIndex + 1);
+    });
+  }
+})();
+
+// Comparison Video Carousel with hover audio control
+(function() {
+  let currentCompIndex = 0;
+  const totalCompCases = 5;
+  
+  const compVideos = [
+    {elem: document.getElementById('comp-video-ours'), name: 'ours'},
+    {elem: document.getElementById('comp-video-dicetalk'), name: 'dicetalk'},
+    {elem: document.getElementById('comp-video-edtalk'), name: 'edtalk'},
+    {elem: document.getElementById('comp-video-sonic'), name: 'sonic'}
+  ].filter(v => v.elem);
+  
+  const compTitle = document.getElementById('comparison-title');
+  const compCounter = document.getElementById('comparison-counter');
+  const compPrevBtn = document.getElementById('comparison-prev');
+  const compNextBtn = document.getElementById('comparison-next');
+  
+  // Setup hover audio control
+  compVideos.forEach(({elem}) => {
+    elem.style.transition = 'opacity 0.3s ease-in-out';
+    
+    elem.addEventListener('mouseenter', function() {
+      // Play and unmute this video
+      this.play();
+      this.muted = false;
+      // Mute all other videos
+      compVideos.forEach(({elem: other}) => {
+        if (other !== this) {
+          other.muted = true;
+        }
+      });
+    });
+    
+    elem.addEventListener('mouseleave', function() {
+      // Mute when mouse leaves
+      this.muted = true;
+    });
+  });
+  
+  function updateComparisonVideos(index) {
+    currentCompIndex = (index + totalCompCases) % totalCompCases;
+    const caseNum = currentCompIndex + 1;
+    
+    // Pause all videos before switching
+    compVideos.forEach(({elem}) => {
+      if (elem) {
+        elem.pause();
+        elem.muted = true;
+      }
+    });
+    
+    // Update all videos
+    compVideos.forEach(({elem, name}) => {
+      if (elem) {
+        elem.style.opacity = '0';
+        setTimeout(() => {
+          elem.src = `static/videos/comparisons/comparison_case${caseNum}_${name}.mp4`;
+          elem.load();
+          setTimeout(() => elem.style.opacity = '1', 50);
+        }, 300);
+      }
+    });
+    
+    if (compTitle) {
+      compTitle.textContent = `Comparison - Case ${caseNum}`;
+    }
+    
+    if (compCounter) {
+      compCounter.textContent = `${caseNum} / ${totalCompCases}`;
+    }
+  }
+  
+  if (compPrevBtn) {
+    compPrevBtn.addEventListener('click', () => updateComparisonVideos(currentCompIndex - 1));
+  }
+  
+  if (compNextBtn) {
+    compNextBtn.addEventListener('click', () => updateComparisonVideos(currentCompIndex + 1));
+  }
+})();
+
+// Auto-pause videos when out of viewport
+(function() {
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const video = entry.target;
+        if (!entry.isIntersecting) {
+          video.pause();
+        } else {
+          video.play();
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    // Observe all videos except hero
+    document.querySelectorAll('video:not(#hero-video):not(#hero-video-mobile)').forEach(video => {
+      observer.observe(video);
+    });
+  }
+})();
+</script>
+
+</body>
+
+</html>
+
