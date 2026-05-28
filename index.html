@@ -21,13 +21,14 @@
   <link rel="stylesheet" href="./static/css/index.css">
 
   <style>
-    /* Constrain all sections from Abstract downward to match abstract text width */
+    /* Constrain all sections from Abstract downward to a consistent readable width */
+    #tldr .container,
     #abstract .container,
     #abstract ~ section .container,
     #abstract ~ footer .container {
-      max-width: 75% !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
     }
   </style>
 
@@ -42,26 +43,18 @@
 <section class="hero is-fullheight video" style="overflow: hidden; position:relative; background-color: black;">
   <!-- Video Carousel Background -->
   <div class="hero-video" id="hero-video-container" style="height: 100%; width: 177.77777778vh; min-width: 100%;min-height: 56.25vw;">
-    <video id="hero-video" playsinline autoplay muted loop style="transition: opacity 0.5s ease-in-out;">
-      <source src="./static/videos/hero_case_005.mp4" type="video/mp4">
+    <video id="hero-video" playsinline autoplay muted loop>
+      <source src="./static/videos/hero_combined.mp4" type="video/mp4">
     </video>
   </div>
-
-  <!-- Video Navigation Arrows -->
-  <button id="hero-prev" class="hero-nav-btn hero-nav-left" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(0,0,0,0.5); border: 2px solid white; border-radius: 50%; width: 50px; height: 50px; color: white; font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
-    ‹
-  </button>
-  <button id="hero-next" class="hero-nav-btn hero-nav-right" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(0,0,0,0.5); border: 2px solid white; border-radius: 50%; width: 50px; height: 50px; color: white; font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
-    ›
-  </button>
 
   <div class="is-hidden-tablet"
     style="display: flex; justify-content: center; align-items: center; width: 100vw; height: 100vh; background-color: black; left: 50%;
     position: absolute;
     top: 50%;
     transform: translate3d(-50%, -50%, 0);">
-    <video id="hero-video-mobile" playsinline autoplay muted loop style="width: 90%; height: auto; min-height: 100%; transition: opacity 0.5s ease-in-out;">
-      <source src="./static/videos/hero_case_005.mp4" type="video/mp4">
+    <video id="hero-video-mobile" playsinline autoplay muted loop style="width: 90%; height: auto; min-height: 100%;">
+      <source src="./static/videos/hero_combined.mp4" type="video/mp4">
     </video>
   </div>
   <div class="overlay"></div>
@@ -69,18 +62,24 @@
   <!-- Hero content: will be in the middle -->
   <div class="hero-body">
     <div class="container has-text-centered">
-      <h1 class="subtitle is-2 publication-title is-size-3-mobile" style="font-size: 2.5rem; font-weight: normal; margin-bottom: 0.5rem; color: white;">
-        Resonant Minds
-      </h1>
-      <h1 class="subtitle is-2 publication-title is-size-3-mobile" style="font-size: 2.5rem; font-weight: normal; color: white;">
-        Closed-Loop Social Avatars with Theory of Mind
-      </h1>
+      <div style="margin-bottom: 1.5rem;">
+        <h1 style="font-size: 3.5rem; font-weight: 700; color: white; letter-spacing: 2px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); margin-bottom: 0.75rem;">
+          Resonant Minds
+        </h1>
+        <div style="width: 80px; height: 3px; background: linear-gradient(90deg, #fff, rgba(255,255,255,0.3)); margin: 0 auto 1rem;"></div>
+        <h2 style="font-size: 1.5rem; font-weight: 300; color: rgba(255,255,255,0.9); letter-spacing: 1px;">
+          Closed-Loop Social Avatars with Theory of Mind
+        </h2>
+      </div>
       <div class="is-size-5 publication-authors" style="margin-top: 2rem;">
-        <span class="author-block" style="color: white; font-weight: normal;"><a href="https://jxb1st.github.io/" style="color: white; text-decoration: underline;">Jianxu Shangguan</a>, <a href="https://xj.editlife.cn" style="color: white; text-decoration: underline;">Jing Xu</a>, <a href="https://alvinyh.github.io/" style="color: white; text-decoration: underline;">Hang Ye</a>, <a href="https://shirleymaxx.github.io/" style="color: white; text-decoration: underline;">Xiaoxuan Ma</a>, <a href="https://cfcs.pku.edu.cn/wangyizhou/" style="color: white; text-decoration: underline;">Yizhou Wang</a>, <a href="https://wentao.live/" style="color: white; text-decoration: underline;">Wentao Zhu</a></span>
+        <span class="author-block" style="color: white; font-weight: normal;"><a href="https://jxb1st.github.io/" style="color: white; text-decoration: underline;">Jianxu Shangguan</a><sup>1</sup>, <a href="https://xj.editlife.cn" style="color: white; text-decoration: underline;">Jing Xu</a><sup>2</sup>, <a href="https://alvinyh.github.io/" style="color: white; text-decoration: underline;">Hang Ye</a><sup>2</sup>, <a href="https://shirleymaxx.github.io/" style="color: white; text-decoration: underline;">Xiaoxuan Ma</a><sup>3</sup>, <a href="https://cfcs.pku.edu.cn/wangyizhou/" style="color: white; text-decoration: underline;">Yizhou Wang</a><sup>2</sup>, <a href="https://wentao.live/" style="color: white; text-decoration: underline;">Wentao Zhu</a><sup>4</sup></span>
+      </div>
+      <div class="is-size-6 publication-affiliations" style="margin-top: 0.5rem; color: rgba(255,255,255,0.85);">
+        <span class="affil-block"><sup>1</sup>University of Nottingham, China Campus&nbsp;&nbsp;&nbsp;&nbsp;<sup>2</sup>Peking University&nbsp;&nbsp;&nbsp;&nbsp;<sup>3</sup>Carnegie Mellon University&nbsp;&nbsp;&nbsp;&nbsp;<sup>4</sup>Eastern Institute of Technology</span>
       </div>
       <div class="publication-links" style="margin-top: 1.5rem;">
         <a href="#" class="button is-rounded" style="margin: 0 0.5rem; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; backdrop-filter: blur(4px);">
-          <span class="icon"><svg viewBox="0 0 2048 2048" width="16" height="16" fill="currentColor" style="vertical-align: middle;"><path d="M894.142 947.471c0-71.104-26.83-128.746-59.926-128.746s-59.926 57.642-59.926 128.746c0 71.104 26.83 128.746 59.926 128.746s59.926-57.642 59.926-128.746zM1273.782 947.471c0-71.104-26.798-128.746-59.852-128.746s-59.852 57.642-59.852 128.746c0 71.104 26.798 128.746 59.852 128.746s59.852-57.642 59.852-128.746zM1374.216 666.501h-63.43c0-33.36 12.354-63.926 32.432-88.356-21.578-54.14-150.792-121.856-319.218-121.856-168.36 0-297.64 67.716-319.218 121.856 19.998 24.43 32.504 54.996 32.504 88.356h-63.502c0-44.712-39.57-81.072-88.144-81.072v-63.502c24.568 0 47.572 6.218 68.14 16.216 46.578-78.212 190.288-145.356 370.22-145.356 179.998 0 323.642 67.146 370.212 145.356 20.576-9.998 43.572-16.216 68.148-16.216v63.502c-48.574 0-88.144 36.36-88.144 81.072zM1910.36 164.931c-19.002 35.284-35.43 42.358-66.29 51.924-26.5 8.002-73.070 4.286-113.21-11.352-9.142-3.576-17.43-9.362-26.148-14.072-25.994-13.926-41.64-11.212-61.426 9.926-11.36 12.214-47.002 44.434-95.926 90.858 99.854 118.858 160.146 271.858 160.146 439.216 0 167.286-60.284 320.358-160.146 439.216 48.926 46.358 84.494 78.496 95.854 90.778 19.786 21.146 35.43 23.86 61.432 9.86 8.712-4.644 16.998-10.43 26.142-14 40.068-15.646 86.71-19.36 113.21-11.286 30.786 9.494 47.286 16.566 66.29 51.85 11.644 27.216 15.93 51.214 7.432 81.716-8.506 30.362-43.286 49.862-87.004 57.432-35.072 6.144-20.64 11.85-21.284 43.286-0.856 47.14-17.788 84.202-58.002 109.356-30.428 18.856-65.288 20.356-98.998 19.142-46.358-1.5-94.142-24.43-105.86-51.998-13.926-32.57 1.726-53.57 14.504-76.858 16.502-29.784 8.426-59.64-12.932-84.502-23.070-27.070-79.784-85.284-112.070-119.64-114.57 86.858-257.076 139.060-412 139.060-155.004 0-297.502-52.202-412.146-139.14-32.286 34.442-89 92.658-112.070 119.728-21.358 24.862-29.36 54.718-12.932 84.576 12.786 23.216 28.43 44.214 14.57 76.786-11.784 27.64-59.568 50.498-105.926 51.998-33.712 1.288-68.644-0.212-99.072-19.142-40.14-25.074-57.14-62.216-58.002-109.282-0.57-31.502 13.86-37.216-21.284-43.36-43.71-7.504-78.424-27.070-86.996-57.358-8.5-30.5-4.214-54.572 7.432-81.716 18.996-35.284 35.496-42.43 66.282-51.924 26.5-8.074 73.142-4.286 113.284 11.286 9.142 3.642 17.43 9.428 26.142 14 26.002 14 41.574 11.352 61.426-9.786 11.424-12.362 47.002-44.5 95.854-90.858-99.848-118.858-160.132-271.93-160.132-439.216 0-167.358 60.358-320.498 160.146-439.288-48.86-46.35-84.428-78.57-95.854-90.784-19.858-21.138-35.43-23.852-61.426-9.926-8.712 4.718-16.998 10.504-26.142 14.072-40.14 15.638-86.784 19.354-113.284 11.352-30.786-9.568-47.286-16.64-66.282-51.924-11.644-27.216-15.93-51.222-7.432-81.716 8.572-30.354 43.286-49.854 87.004-57.432 35.146-6.136 20.714-11.856 21.284-43.286 0.856-47.14 17.854-84.21 58.002-109.356 30.428-18.856 65.36-20.356 99.072-19.142 46.358 1.426 94.142 24.43 105.926 51.998 13.86 32.504-1.784 53.642-14.57 76.858-16.428 29.718-8.426 59.574 12.932 84.502 23.070 26.998 79.784 85.284 112.070 119.712 114.644-86.93 257.142-139.14 412.146-139.14 154.998 0 297.428 52.21 412 139.14 32.286-34.428 89.074-92.716 112.142-119.712 21.358-24.928 29.36-54.784 12.932-84.502-12.858-23.216-28.43-44.354-14.578-76.858 11.798-27.574 59.574-50.57 105.932-51.998 33.712-1.214 68.644 0.286 99.080 19.142 40.14 25.146 57.066 62.216 57.93 109.356 0.636 31.43-13.788 37.15 21.358 43.286 43.638 7.578 78.424 27.078 86.922 57.432 8.544 30.5 4.184 54.498-7.454 81.716zM1024.074 90.215c-353.572 0-641.214 287.642-641.214 641.214 0 353.5 287.642 641.142 641.214 641.142 353.426 0 641.142-287.642 641.142-641.142 0-353.572-287.714-641.214-641.142-641.214z"/></svg></span>
+          <span class="icon"><img src="./static/images/arxiv-logo.svg" alt="arXiv" width="16" height="16" style="vertical-align: middle; display: block;"></span>
           <span>arXiv</span>
         </a>
         <a href="#" class="button is-rounded" style="margin: 0 0.5rem; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; backdrop-filter: blur(4px);">
@@ -93,6 +92,18 @@
 
 </section>
 
+
+<!-- TL;DR Section -->
+<section class="section" id="tldr" style="padding-top: 1rem; padding-bottom: 1rem;">
+  <div class="container is-max-widescreen">
+    <div class="notification is-info is-light" style="background-color: #f0f7ff; border-left: 4px solid #3273dc;">
+      <h3 class="title is-4" style="margin-bottom: 0.75rem;">TL;DR</h3>
+      <p style="font-size: 1.1rem;">
+        We propose a <strong>closed-loop dual-agent framework</strong> that unifies <strong>perception</strong>, <strong>social reasoning (Theory of Mind)</strong>, and <strong>multimodal expression generation</strong> into a single coherent interaction cycle. Our system generates emotionally-controllable dual-agent videos with synchronized speech, capturing bidirectional conversational dynamics that prior single-character talking-head methods cannot produce.
+      </p>
+    </div>
+  </div>
+</section>
 
 <!-- Abstract Section -->
 <section class="section" id="abstract">
@@ -116,7 +127,7 @@
     <!-- Single Example with Carousel -->
     <div class="scene-block" style="position: relative;">
       <div class="columns is-centered">
-        <div class="column" style="max-width: 1700px;">
+        <div class="column">
           <h2 class="title is-4 has-text-centered" id="example-title">Case 1</h2>
           
           <!-- Scenario Description -->
@@ -187,18 +198,18 @@
     <br>
     
     <div class="content has-text-centered">
-      <img src="static/videos/framework.gif" alt="Framework" style="width: 90%; max-width: 1200px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-      <p class="has-text-justified" style="margin-top: 1rem; width: 90%; max-width: 1200px; margin-left: auto; margin-right: auto;">
+      <img src="static/videos/framework.gif" alt="Framework" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+      <p class="has-text-justified" style="margin-top: 1rem;">
         <strong>Our closed-loop framework</strong> consists of three integrated modules:
       </p>
-      <p class="has-text-justified" style="margin-top: 0.5rem; width: 90%; max-width: 1200px; margin-left: auto; margin-right: auto;">
-        (1) <strong>Perception Module</strong> analyzes partner's multimodal behaviors including facial expressions, emotions, and audio prosody from video.
+      <p class="has-text-justified" style="margin-top: 0.5rem;">
+        (1) <strong><span style="color: #3273dc;">Perception Module</span></strong> analyzes partner's multimodal behaviors including facial expressions, emotions, and audio prosody from video.
       </p>
-      <p class="has-text-justified" style="margin-top: 0.5rem; width: 90%; max-width: 1200px; margin-left: auto; margin-right: auto;">
-        (2) <strong>Social Reasoning Module</strong> employs Theory of Mind inference to deduce hidden mental states, generates multiple candidate responses, and uses an ensemble mechanism to select optimal actions balancing empathy, strategy, and personality coherence.
+      <p class="has-text-justified" style="margin-top: 0.5rem;">
+        (2) <strong><span style="color: #48c774;">Social Reasoning Module</span></strong> employs Theory of Mind inference to deduce hidden mental states, generates multiple candidate responses, and uses an ensemble mechanism to select optimal actions balancing empathy, strategy, and personality coherence.
       </p>
-      <p class="has-text-justified" style="margin-top: 0.5rem; width: 90%; max-width: 1200px; margin-left: auto; margin-right: auto;">
-        (3) <strong>Expression Module</strong> synthesizes emotionally-controllable dual-agent videos with synchronized speech, capturing both speaker articulation and listener reactive expressions.
+      <p class="has-text-justified" style="margin-top: 0.5rem;">
+        (3) <strong><span style="color: #ff9800;">Expression Module</span></strong> synthesizes emotionally-controllable dual-agent videos with synchronized speech, capturing both speaker articulation and listener reactive expressions.
       </p>
     </div>
 
@@ -207,7 +218,7 @@
 
 
 <!-- Comparisons Section -->
-<section class="section is-small" id="comparisons">
+<section class="section" id="comparisons">
   <div class="container is-max-widescreen">
     <h2 class="title is-2 has-text-centered">Talking Head Generation Results</h2>
     <br>
@@ -221,26 +232,19 @@
     
     <br><br>
     
-    <div class="content has-text-justified">
-      <p>
-        Talking head generation is evaluated using speaker and listener metrics from ViCo, video emotion metrics, and audio quality metrics from URO-Bench. We compare against state-of-the-art methods including <strong>DICE-Talk</strong>, <strong>EDTalk</strong>, and <strong>Sonic</strong>.
-      </p>
-    </div>
-
-    <br>
-    <h2 class="title is-4">Video Comparison with State-of-the-Art</h2>
+    <h2 class="title is-4" style="margin-top: 2rem;">Video Comparison with State-of-the-Art</h2>
     
     <!-- Method Comparison Carousel -->
     <div class="scene-block" style="position: relative;">
       <div class="columns is-centered">
-        <div class="column" style="max-width: 1700px;">
+        <div class="column">
           <h3 class="title is-5 has-text-centered" id="comparison-title">Comparison - Case 1</h3>
           
           <!-- 4 videos in grid -->
           <div class="columns is-multiline">
             <div class="column is-6">
               <div style="position: relative; display: flex; justify-content: center;">
-                <div style="width: 100%; max-width: 700px;">
+                <div style="width: 100%;">
                   <p class="has-text-centered" style="margin-bottom: 0.5rem;"><strong>Ours</strong></p>
                   <video id="comp-video-ours" autoplay muted loop playsinline controls
                          style="width: 100%; border-radius: 10px; display: block;">
@@ -251,7 +255,7 @@
             </div>
             <div class="column is-6">
               <div style="position: relative; display: flex; justify-content: center;">
-                <div style="width: 100%; max-width: 700px;">
+                <div style="width: 100%;">
                   <p class="has-text-centered" style="margin-bottom: 0.5rem;"><strong>DICE-Talk</strong></p>
                   <video id="comp-video-dicetalk" autoplay muted loop playsinline controls
                          style="width: 100%; border-radius: 10px; display: block;">
@@ -262,7 +266,7 @@
             </div>
             <div class="column is-6">
               <div style="position: relative; display: flex; justify-content: center;">
-                <div style="width: 100%; max-width: 700px;">
+                <div style="width: 100%;">
                   <p class="has-text-centered" style="margin-bottom: 0.5rem;"><strong>EDTalk</strong></p>
                   <video id="comp-video-edtalk" autoplay muted loop playsinline controls
                          style="width: 100%; border-radius: 10px; display: block;">
@@ -273,7 +277,7 @@
             </div>
             <div class="column is-6">
               <div style="position: relative; display: flex; justify-content: center;">
-                <div style="width: 100%; max-width: 700px;">
+                <div style="width: 100%;">
                   <p class="has-text-centered" style="margin-bottom: 0.5rem;"><strong>Sonic</strong></p>
                   <video id="comp-video-sonic" autoplay muted loop playsinline controls
                          style="width: 100%; border-radius: 10px; display: block;">
@@ -374,7 +378,7 @@
             <td>2.64</td>
             <td>0.3333</td>
           </tr>
-          <tr style="background-color: #fff3cd;">
+          <tr>
             <td><strong>Ours</strong></td>
             <td style="background-color: #e8f4f8;"><strong>61.00</strong></td>
             <td style="background-color: #e8f4f8;"><strong>91.92</strong></td>
@@ -395,9 +399,6 @@
     </div>
   </div>
 </section>
-
-
-
 
 <!-- LLM Social Simulation Results -->
 <section class="section" id="llm-results">
@@ -647,7 +648,7 @@
             <td>1.80</td>
             <td>3.11</td>
           </tr>
-          <tr style="background-color: #fff3cd;">
+          <tr>
             <td><strong>Δ</strong></td>
             <td><strong>-0.46</strong></td>
             <td><strong>-1.90</strong></td>
@@ -677,14 +678,14 @@
 
     <div class="content has-text-justified">
       <p>
-        We conduct systematic ablation studies to validate each component of our framework. Table presents quantitative results, with visual comparisons in the figure below.
+        We conduct systematic ablation studies to validate each component of our framework. The figure below presents visual comparisons of our ablation study.
       </p>
     </div>
 
     <br>
     <div class="content has-text-centered">
-      <img src="static/images/ablation_emo_score_new.png" alt="Ablation Study" style="width: 80%; max-width: 800px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-      <p class="has-text-justified" style="margin-top: 1rem; width: 80%; max-width: 800px; margin-left: auto; margin-right: auto;">
+      <img src="static/images/ablation_emo_score_new.png" alt="Ablation Study" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+      <p class="has-text-justified" style="margin-top: 1rem;">
         <strong>Ablation study results sorted by audio emotion accuracy (Emo-Acc).</strong> Our system achieves the best performance across all three metrics. The results reveal that w/o Ensemble maintains high audio emotion but severely degrades video emotion, while w/o Listener shows the worst overall performance.
       </p>
     </div>
@@ -716,11 +717,11 @@
         <thead>
           <tr>
             <th></th>
-            <th>Bel.↑</th>
-            <th>Goal↑</th>
-            <th>Sec.↑</th>
-            <th>Dep.↑</th>
-            <th>Flu.↑</th>
+            <th>Bel. [1,5]↑</th>
+            <th>Goal [1,5]↑</th>
+            <th>Sec. [1,5]↑</th>
+            <th>Dep. [1,5]↑</th>
+            <th>Flu. [1,5]↑</th>
             <th>Pref.↑</th>
           </tr>
         </thead>
@@ -743,7 +744,7 @@
             <td>3.54</td>
             <td>23.5%</td>
           </tr>
-          <tr style="background-color: #fff3cd;">
+          <tr>
             <td><strong>Ours</strong></td>
             <td style="background-color: #e8f4f8;"><strong>3.50</strong></td>
             <td style="background-color: #e8f4f8;"><strong>3.88</strong></td>
@@ -768,15 +769,13 @@
       </p>
     </div>
 
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
           <thead>
             <tr>
               <th>Method</th>
-              <th>Emotion Expression↑</th>
-              <th>Naturalness↑</th>
-              <th>Overall Quality↑</th>
+              <th>Emotion Expression [1,5]↑</th>
+              <th>Naturalness [1,5]↑</th>
+              <th>Overall Quality [1,5]↑</th>
             </tr>
           </thead>
           <tbody>
@@ -798,7 +797,7 @@
               <td>4.15</td>
               <td>3.29</td>
             </tr>
-            <tr style="background-color: #fff3cd;">
+            <tr>
               <td><strong>Ours</strong></td>
               <td style="background-color: #e8f4f8;"><strong>4.50</strong></td>
               <td style="background-color: #e8f4f8;"><strong>4.34</strong></td>
@@ -806,11 +805,8 @@
             </tr>
           </tbody>
         </table>
-      </div>
-    </div>
 
-    <br>
-    <div class="content has-text-justified">
+    <div class="content has-text-justified" style="margin-top: 1.5rem;">
       <p>
         Our method achieves the highest scores in emotional expression, communication naturalness, and overall quality, significantly outperforming all comparison methods across these dimensions.
       </p>
@@ -821,7 +817,7 @@
 
 <!-- Footer -->
 <section class="section">
-  <div class="container is-max-desktop">
+  <div class="container is-max-widescreen">
     <h2 class="title is-2 has-text-centered">BibTeX</h2>
     <div class="content has-text-justified">
       <p>
@@ -843,9 +839,6 @@
       <p>
         <strong>Resonant Minds: Closed-Loop Social Avatars with Theory of Mind</strong>
       </p>
-      <p>
-        Jianxu Shangguan, Jing Xu, Hang Ye, Xiaoxuan Ma, Yizhou Wang, Wentao Zhu
-      </p>
       <p class="is-size-7">
         Website template adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>
       </p>
@@ -854,69 +847,6 @@
 </footer>
 
 <script>
-// Hero Video Carousel
-(function() {
-  // Shuffled order: 5, 3, 1, 4, 2 (only using cases without white bars, different from video results 1-7)
-  const heroCases = [
-    './static/videos/hero_case_005.mp4',
-    './static/videos/hero_case_003.mp4',
-    './static/videos/hero_case_001.mp4',
-    './static/videos/hero_case_004.mp4',
-    './static/videos/hero_case_002.mp4'
-  ];
-  
-  let currentHeroIndex = 0;
-  const heroVideo = document.getElementById('hero-video');
-  const heroVideoMobile = document.getElementById('hero-video-mobile');
-  const heroPrevBtn = document.getElementById('hero-prev');
-  const heroNextBtn = document.getElementById('hero-next');
-  
-  function updateHeroVideo(index) {
-    currentHeroIndex = (index + heroCases.length) % heroCases.length;
-    const videoSrc = heroCases[currentHeroIndex];
-    
-    if (heroVideo) {
-      heroVideo.style.opacity = '0';
-      setTimeout(() => {
-        heroVideo.src = videoSrc;
-        heroVideo.load();
-        heroVideo.play();
-        setTimeout(() => {
-          heroVideo.style.opacity = '1';
-        }, 50);
-      }, 500);
-    }
-    if (heroVideoMobile) {
-      heroVideoMobile.style.opacity = '0';
-      setTimeout(() => {
-        heroVideoMobile.src = videoSrc;
-        heroVideoMobile.load();
-        heroVideoMobile.play();
-        setTimeout(() => {
-          heroVideoMobile.style.opacity = '1';
-        }, 50);
-      }, 500);
-    }
-  }
-  
-  if (heroPrevBtn) {
-    heroPrevBtn.addEventListener('click', function() {
-      updateHeroVideo(currentHeroIndex - 1);
-    });
-  }
-  
-  if (heroNextBtn) {
-    heroNextBtn.addEventListener('click', function() {
-      updateHeroVideo(currentHeroIndex + 1);
-    });
-  }
-  
-  // Auto-rotate every 10 seconds
-  setInterval(function() {
-    updateHeroVideo(currentHeroIndex + 1);
-  }, 10000);
-})();
-
 // Examples Video Carousel with Case Metadata
 (function() {
   let caseMetadata = [];
