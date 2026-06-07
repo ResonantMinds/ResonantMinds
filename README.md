@@ -52,4 +52,4 @@ If you find our work useful, please cite:
 
 ## Contact
 
-- Jianxu Shangguan: iculizhi@gmail.com
+Jing Xu: iculizhi@gmail.com
