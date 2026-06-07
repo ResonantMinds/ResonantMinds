@@ -37,11 +37,14 @@
     /* Mobile readability: unify font sizes on small screens */
     @media screen and (max-width: 768px) {
       #hero-video-container {
+        display: block !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
         width: 100vw !important;
         height: 100vh !important;
         min-width: auto !important;
         min-height: auto !important;
-        left: 0 !important;
         transform: none !important;
       }
       html { font-size: 17px; }
@@ -911,7 +914,7 @@
   const heroVideo = document.getElementById('hero-video');
 
   if (heroVideo && isMobile) {
-    heroVideo.innerHTML = '<source src="static/videos/mobile/hero_combined_mobile_stacked.mp4" type="video/mp4">';
+    heroVideo.innerHTML = '<source src="./static/videos/mobile/hero_combined_mobile_stacked.mp4" type="video/mp4">';
     heroVideo.load();
   }
 
