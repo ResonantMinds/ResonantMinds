@@ -156,8 +156,7 @@
           ‹
         </button>
         <div style="text-align: center; min-width: 120px;">
-          <h2 class="title is-4" id="example-title" style="margin: 0;">Case 1</h2>
-          <div id="example-dots" style="margin-top: 0.5rem;">
+          <div id="example-dots" style="margin-top: 0;">
             <span style="display: inline-block; width: 8px; height: 8px; background: #3273dc; border-radius: 50%; margin: 0 3px;"></span>
             <span style="display: inline-block; width: 8px; height: 8px; background: #ddd; border-radius: 50%; margin: 0 3px;"></span>
             <span style="display: inline-block; width: 8px; height: 8px; background: #ddd; border-radius: 50%; margin: 0 3px;"></span>
@@ -223,10 +222,6 @@
         </div>
       </div>
 
-      <!-- Counter -->
-      <p class="has-text-centered" id="example-counter" style="margin-top: 1rem; color: #999;">
-        1 / 7
-      </p>
     </div>
 
   </div>
@@ -333,7 +328,7 @@
             <button id="comparison-prev" style="background: rgba(0,0,0,0.7); border: 2px solid #333; border-radius: 50%; width: 45px; height: 45px; color: white; font-size: 20px; cursor: pointer;">
               ‹
             </button>
-            <span id="comparison-counter" style="margin: 0 2rem; color: #666; font-size: 1.1rem;">1 / 5</span>
+            <span style="margin: 0 2rem;"></span>
             <button id="comparison-next" style="background: rgba(0,0,0,0.7); border: 2px solid #333; border-radius: 50%; width: 45px; height: 45px; color: white; font-size: 20px; cursor: pointer;">
               ›
             </button>
@@ -936,7 +931,6 @@
   const videoPrefix = isMobile ? './static/videos/mobile/' : './static/videos/';
   
   const exampleVideo = document.getElementById('example-video');
-  const exampleTitle = document.getElementById('example-title');
   const exampleScenarioDesc = document.getElementById('example-scenario-desc');
   const exampleGoalA = document.getElementById('example-goal-a');
   const exampleGoalB = document.getElementById('example-goal-b');
@@ -950,7 +944,6 @@
   const exampleAgentBAvatar = document.getElementById('example-agent-b-avatar');
   const examplePrevBtn = document.getElementById('example-prev');
   const exampleNextBtn = document.getElementById('example-next');
-  const exampleCounter = document.getElementById('example-counter');
   const exampleDots = document.getElementById('example-dots');
   const audioControlBtn = document.getElementById('audio-control');
   
@@ -1145,9 +1138,6 @@
     }
     
     // Update text content
-    if (exampleTitle) {
-      exampleTitle.textContent = `Case ${parseInt(caseData.case_id)}`;
-    }
     if (exampleScenarioDesc) {
       exampleScenarioDesc.textContent = caseData.scenario.description;
     }
@@ -1181,10 +1171,6 @@
     if (exampleAgentBDesc) {
       exampleAgentBDesc.textContent = caseData.agent_b.personality_desc;
     }
-    if (exampleCounter) {
-      exampleCounter.textContent = `${currentExampleIndex + 1} / ${caseMetadata.length}`;
-    }
-    
     // Update pagination dots
     if (exampleDots) {
       exampleDots.innerHTML = '';
@@ -1224,7 +1210,6 @@
     {elem: document.getElementById('comp-video-sonic'), name: 'sonic'}
   ].filter(v => v.elem);
   
-  const compCounter = document.getElementById('comparison-counter');
   const compPrevBtn = document.getElementById('comparison-prev');
   const compNextBtn = document.getElementById('comparison-next');
   
@@ -1299,9 +1284,6 @@
       }
     });
 
-    if (compCounter) {
-      compCounter.textContent = `${caseNum} / ${totalCompCases}`;
-    }
   }
 
   // Start with Ours playing muted
