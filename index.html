@@ -904,28 +904,31 @@
 </footer>
 
 <script>
-// Respect prefers-reduced-motion: disable hero video autoplay for users who prefer reduced motion
+// Hero video: stacked vertical on mobile, side-by-side on desktop
 (function() {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  const heroVideos = document.querySelectorAll('#hero-video');
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth <= 768;
+  const heroVideo = document.getElementById('hero-video');
 
-  if (prefersReducedMotion || isMobile) {
-    heroVideos.forEach(function(v) {
-      v.removeAttribute('autoplay');
-      v.pause();
-    });
+  if (heroVideo && isMobile) {
+    heroVideo.innerHTML = '<source src="static/videos/mobile/hero_combined_mobile_stacked.mp4" type="video/mp4">';
+    heroVideo.load();
   }
 
-  // Hover-to-unmute hero background videos on desktop
-  if (!isMobile) {
+  if (prefersReducedMotion && heroVideo) {
+    heroVideo.removeAttribute('autoplay');
+    heroVideo.pause();
+  }
+
+  // Hover-to-unmute hero background video on desktop only
+  if (!isMobile && heroVideo) {
     const heroSection = document.querySelector('section.hero');
     if (heroSection) {
       heroSection.addEventListener('mouseenter', function() {
-        heroVideos.forEach(function(v) { v.muted = false; });
+        heroVideo.muted = false;
       });
       heroSection.addEventListener('mouseleave', function() {
-        heroVideos.forEach(function(v) { v.muted = true; });
+        heroVideo.muted = true;
       });
     }
   }
