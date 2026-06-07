@@ -324,12 +324,18 @@
           </div>
           
           <!-- Navigation for comparison -->
-          <div style="text-align: center; margin-top: 1rem; position: relative;">
-            <button id="comparison-prev" style="background: rgba(0,0,0,0.7); border: 2px solid #333; border-radius: 50%; width: 45px; height: 45px; color: white; font-size: 20px; cursor: pointer;">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 1rem;">
+            <button id="comparison-prev" style="background: rgba(0,0,0,0.7); border: 2px solid #333; border-radius: 50%; width: 45px; height: 45px; color: white; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
               ‹
             </button>
-            <span style="margin: 0 2rem;"></span>
-            <button id="comparison-next" style="background: rgba(0,0,0,0.7); border: 2px solid #333; border-radius: 50%; width: 45px; height: 45px; color: white; font-size: 20px; cursor: pointer;">
+            <div id="comparison-dots" style="text-align: center;">
+              <span style="display: inline-block; width: 8px; height: 8px; background: #3273dc; border-radius: 50%; margin: 0 3px;"></span>
+              <span style="display: inline-block; width: 8px; height: 8px; background: #ddd; border-radius: 50%; margin: 0 3px;"></span>
+              <span style="display: inline-block; width: 8px; height: 8px; background: #ddd; border-radius: 50%; margin: 0 3px;"></span>
+              <span style="display: inline-block; width: 8px; height: 8px; background: #ddd; border-radius: 50%; margin: 0 3px;"></span>
+              <span style="display: inline-block; width: 8px; height: 8px; background: #ddd; border-radius: 50%; margin: 0 3px;"></span>
+            </div>
+            <button id="comparison-next" style="background: rgba(0,0,0,0.7); border: 2px solid #333; border-radius: 50%; width: 45px; height: 45px; color: white; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center;">
               ›
             </button>
           </div>
@@ -1210,6 +1216,7 @@
   
   const compPrevBtn = document.getElementById('comparison-prev');
   const compNextBtn = document.getElementById('comparison-next');
+  const compDots = document.getElementById('comparison-dots');
   
   // Performance: only play the hovered comparison video (or Ours by default).
   // This avoids decoding 4 videos simultaneously.
@@ -1282,6 +1289,16 @@
       }
     });
 
+    // Update dots
+    if (compDots) {
+      compDots.innerHTML = '';
+      for (let i = 0; i < totalCompCases; i++) {
+        const dot = document.createElement('span');
+        dot.style.cssText = 'display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin: 0 3px; transition: background 0.3s;';
+        dot.style.background = i === currentCompIndex ? '#3273dc' : '#ddd';
+        compDots.appendChild(dot);
+      }
+    }
   }
 
   // Start with Ours playing muted
