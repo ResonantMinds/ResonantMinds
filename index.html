@@ -21,6 +21,9 @@
   <link rel="stylesheet" href="./static/css/index.css">
 
   <style>
+    /* Slightly larger base text for readability */
+    body { font-size: 17px; }
+
     /* Constrain all sections from Abstract downward to a consistent readable width */
     #tldr .container,
     #abstract .container,
@@ -33,27 +36,28 @@
 
     /* Mobile readability: unify font sizes on small screens */
     @media screen and (max-width: 768px) {
-      .hero h1 { font-size: 2.2rem !important; }
-      .hero h2 { font-size: 1.1rem !important; }
-      .hero .publication-authors { font-size: 0.95rem !important; }
-      .hero .publication-affiliations { font-size: 0.85rem !important; }
+      html { font-size: 17px; }
+      .hero h1 { font-size: 2.4rem !important; }
+      .hero h2 { font-size: 1.15rem !important; }
+      .hero .publication-authors { font-size: 1rem !important; }
+      .hero .publication-affiliations { font-size: 0.9rem !important; }
 
-      #tldr p { font-size: 1rem !important; }
-      #abstract .content { font-size: 1rem !important; }
+      #tldr p { font-size: 1.05rem !important; }
+      #abstract .content { font-size: 1.05rem !important; }
 
-      .title.is-2 { font-size: 1.6rem !important; }
-      .title.is-4 { font-size: 1.3rem !important; }
-      .title.is-5 { font-size: 1.15rem !important; }
+      .title.is-2 { font-size: 1.7rem !important; }
+      .title.is-4 { font-size: 1.4rem !important; }
+      .title.is-5 { font-size: 1.2rem !important; }
 
-      .content { font-size: 1rem !important; }
-      .table { font-size: 0.85rem !important; }
+      .content { font-size: 1.05rem !important; }
+      .table { font-size: 0.9rem !important; }
 
       .section { padding: 2rem 1rem !important; }
       .container { padding-left: 0.75rem !important; padding-right: 0.75rem !important; }
 
       #example-agent-a-trait,
-      #example-agent-b-trait { font-size: 0.9rem !important; }
-      .agent-goal { font-size: 0.95rem !important; }
+      #example-agent-b-trait { font-size: 0.95rem !important; }
+      .agent-goal { font-size: 1rem !important; }
     }
   </style>
 
@@ -125,7 +129,7 @@
   <div class="container is-max-widescreen">
     <div class="box" style="background-color: #fafafa; border-radius: 12px; box-shadow: none; border: 1px solid #eee;">
       <h3 class="title is-4" style="margin-bottom: 0.75rem; color: #333;">TL;DR</h3>
-      <p style="font-size: 1.1rem; color: #555; line-height: 1.7;">
+      <p style="font-size: 1.15rem; color: #555; line-height: 1.7;">
         We propose a <strong>closed-loop dual-agent framework</strong> that unifies <strong>perception</strong>, <strong>social reasoning (Theory of Mind)</strong>, and <strong>multimodal expression generation</strong> into a single coherent interaction cycle. Our system generates emotionally-controllable dual-agent videos with synchronized speech, capturing bidirectional conversational dynamics that prior single-character talking-head methods cannot produce.
       </p>
     </div>
@@ -136,7 +140,7 @@
 <section class="section" id="abstract">
   <div class="container is-max-widescreen">
     <h2 class="title is-2 has-text-centered">Abstract</h2>
-    <div class="content has-text-justified" style="font-size: 1.25rem; line-height: 1.8;">
+    <div class="content has-text-justified" style="font-size: 1.3rem; line-height: 1.8;">
       <p>
         Creating lifelike social avatars with genuine conversational intelligence requires unifying cognitive reasoning and multimodal generation within a coherent framework. Current approaches treat these as separate tasks: Large Language Models excel at dialogue but lack embodied expression, while diffusion-based talking head models achieve visual fidelity but ignore social cognition. To bridge this gap, we propose a <strong>closed-loop dual-agent framework</strong> integrating <strong>perception, social reasoning, and expression</strong> into a continuous interaction cycle. The perception module analyzes partners' multimodal behaviors from video, while the social reasoning module infers hidden mental states through <strong>Theory of Mind (ToM)</strong> and selects responses via an ensemble mechanism. The expression module then generates emotionally-controllable dual-agent videos synthesizing both speaker speech and expression alongside listener reactive behaviors, capturing bidirectional conversational dynamics absent in prior work. We construct a hierarchical Persona-Scenario dataset with psychologically grounded personas and private social goals to support realistic evaluation. Experiments on this dataset demonstrate competitive or superior performance against both agent-mode and full-information script-mode baselines across goal completion, naturalness, and video fidelity. Notably, our method surpasses even the full-information Script mode on depth, consistency, and believability metrics, demonstrating that the cognitive effort of Theory of Mind inference yields richer, more thoughtful social interactions than unrestricted information access.
       </p>
@@ -205,9 +209,9 @@
             <div style="flex: 1;">
               <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem; flex-wrap: wrap;">
                 <h4 class="title is-6" style="margin: 0;" id="example-agent-a-name">Agent A</h4>
-                <span id="example-agent-a-trait" style="color: #333; font-size: 0.85rem; font-weight: 600;">Loading...</span>
+                <span id="example-agent-a-trait" style="color: #333; font-size: 0.9rem; font-weight: 600;">Loading...</span>
               </div>
-              <p class="agent-goal" style="font-size: 0.85rem; color: #555; line-height: 1.5;">
+              <p class="agent-goal" style="font-size: 0.9rem; color: #555; line-height: 1.5;">
                 <strong>Goal:</strong> <span id="example-goal-a" style="color: #666;">Loading...</span>
               </p>
             </div>
@@ -220,9 +224,9 @@
             <div style="flex: 1;">
               <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem; flex-wrap: wrap;">
                 <h4 class="title is-6" style="margin: 0;" id="example-agent-b-name">Agent B</h4>
-                <span id="example-agent-b-trait" style="color: #333; font-size: 0.85rem; font-weight: 600;">Loading...</span>
+                <span id="example-agent-b-trait" style="color: #333; font-size: 0.9rem; font-weight: 600;">Loading...</span>
               </div>
-              <p class="agent-goal" style="font-size: 0.85rem; color: #555; line-height: 1.5;">
+              <p class="agent-goal" style="font-size: 0.9rem; color: #555; line-height: 1.5;">
                 <strong>Goal:</strong> <span id="example-goal-b" style="color: #666;">Loading...</span>
               </p>
             </div>
