@@ -272,7 +272,7 @@
               <div style="position: relative; display: flex; justify-content: center;">
                 <div style="width: 100%;">
                   <p class="has-text-centered" style="margin-bottom: 0.5rem;"><strong>Ours</strong></p>
-                  <video id="comp-video-ours" autoplay muted loop playsinline controls preload="metadata"
+                  <video id="comp-video-ours" class="comp-video" muted loop playsinline controls preload="metadata"
                          style="width: 100%; border-radius: 10px; display: block;">
                     <source src="static/videos/comparisons/comparison_case1_ours.mp4" type="video/mp4">
                   </video>
@@ -283,7 +283,7 @@
               <div style="position: relative; display: flex; justify-content: center;">
                 <div style="width: 100%;">
                   <p class="has-text-centered" style="margin-bottom: 0.5rem;"><strong>DICE-Talk</strong></p>
-                  <video id="comp-video-dicetalk" autoplay muted loop playsinline controls preload="metadata"
+                  <video id="comp-video-dicetalk" class="comp-video" muted loop playsinline controls preload="none"
                          style="width: 100%; border-radius: 10px; display: block;">
                     <source src="static/videos/comparisons/comparison_case1_dicetalk.mp4" type="video/mp4">
                   </video>
@@ -294,7 +294,7 @@
               <div style="position: relative; display: flex; justify-content: center;">
                 <div style="width: 100%;">
                   <p class="has-text-centered" style="margin-bottom: 0.5rem;"><strong>EDTalk</strong></p>
-                  <video id="comp-video-edtalk" autoplay muted loop playsinline controls preload="metadata"
+                  <video id="comp-video-edtalk" class="comp-video" muted loop playsinline controls preload="none"
                          style="width: 100%; border-radius: 10px; display: block;">
                     <source src="static/videos/comparisons/comparison_case1_edtalk.mp4" type="video/mp4">
                   </video>
@@ -305,7 +305,7 @@
               <div style="position: relative; display: flex; justify-content: center;">
                 <div style="width: 100%;">
                   <p class="has-text-centered" style="margin-bottom: 0.5rem;"><strong>Sonic</strong></p>
-                  <video id="comp-video-sonic" autoplay muted loop playsinline controls preload="metadata"
+                  <video id="comp-video-sonic" class="comp-video" muted loop playsinline controls preload="none"
                          style="width: 100%; border-radius: 10px; display: block;">
                     <source src="static/videos/comparisons/comparison_case1_sonic.mp4" type="video/mp4">
                   </video>
@@ -1195,32 +1195,50 @@
   const compPrevBtn = document.getElementById('comparison-prev');
   const compNextBtn = document.getElementById('comparison-next');
   
-  // Setup hover audio control
+  // Performance: only play the hovered comparison video (or Ours by default).
+  // This avoids decoding 4 videos simultaneously.
+  function playOursMuted() {
+    compVideos.forEach(({elem, name}) => {
+      if (!elem) return;
+      if (name === 'ours') {
+        elem.muted = true;
+        elem.play().catch(() => {});
+      } else {
+        elem.pause();
+        elem.muted = true;
+      }
+    });
+  }
+
   compVideos.forEach(({elem}) => {
     elem.style.transition = 'opacity 0.3s ease-in-out';
-    
+
     elem.addEventListener('mouseenter', function() {
-      // Play and unmute this video
-      this.play();
-      this.muted = false;
-      // Mute all other videos
+      // Pause all others, then play & unmute this one
       compVideos.forEach(({elem: other}) => {
         if (other !== this) {
+          other.pause();
           other.muted = true;
         }
       });
+      if (this.preload === 'none') {
+        this.preload = 'metadata';
+        this.load();
+      }
+      this.play().catch(() => {});
+      this.muted = false;
     });
-    
+
     elem.addEventListener('mouseleave', function() {
-      // Mute when mouse leaves
       this.muted = true;
+      playOursMuted();
     });
   });
-  
+
   function updateComparisonVideos(index) {
     currentCompIndex = (index + totalCompCases) % totalCompCases;
     const caseNum = currentCompIndex + 1;
-    
+
     // Pause all videos before switching
     compVideos.forEach(({elem}) => {
       if (elem) {
@@ -1228,27 +1246,37 @@
         elem.muted = true;
       }
     });
-    
+
     // Update all videos
+    let loadedCount = 0;
     compVideos.forEach(({elem, name}) => {
       if (elem) {
         elem.style.opacity = '0';
         setTimeout(() => {
           elem.src = `${compPrefix}comparison_case${caseNum}_${name}.mp4`;
           elem.load();
-          setTimeout(() => elem.style.opacity = '1', 50);
+          setTimeout(() => {
+            elem.style.opacity = '1';
+            loadedCount++;
+            if (loadedCount === compVideos.length) {
+              playOursMuted();
+            }
+          }, 50);
         }, 300);
       }
     });
-    
+
     if (compTitle) {
       compTitle.textContent = `Comparison - Case ${caseNum}`;
     }
-    
+
     if (compCounter) {
       compCounter.textContent = `${caseNum} / ${totalCompCases}`;
     }
   }
+
+  // Start with Ours playing muted
+  playOursMuted();
   
   if (compPrevBtn) {
     compPrevBtn.addEventListener('click', () => updateComparisonVideos(currentCompIndex - 1));
@@ -1273,8 +1301,9 @@
       });
     }, { threshold: 0.5 });
     
-    // Observe all videos except hero
-    document.querySelectorAll('video:not(#hero-video):not(#hero-video-mobile)').forEach(video => {
+    // Observe all videos except hero and comparison grid
+    // (comparison videos are managed separately to avoid decoding 4 at once)
+    document.querySelectorAll('video:not(#hero-video):not(#hero-video-mobile):not(.comp-video)').forEach(video => {
       observer.observe(video);
     });
   }
