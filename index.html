@@ -915,7 +915,15 @@
   const heroVideo = document.getElementById('hero-video');
 
   if (heroVideo && isMobile) {
-    heroVideo.innerHTML = '<source src="./static/videos/mobile/hero_combined_mobile_stacked.mp4" type="video/mp4">';
+    // Clear existing sources and use DOM API for Safari compatibility
+    while (heroVideo.firstChild) {
+      heroVideo.removeChild(heroVideo.firstChild);
+    }
+    const source = document.createElement('source');
+    source.src = './static/videos/mobile/hero_combined_mobile_stacked.mp4';
+    source.type = 'video/mp4';
+    heroVideo.appendChild(source);
+    heroVideo.poster = './static/videos/mobile/hero_poster_mobile.jpg';
     heroVideo.load();
   }
 
