@@ -1,5 +1,0 @@
-file '/home/ubuntu/work2/sites/persona_site_dev/static/videos/hero_case_005.mp4'
-file '/home/ubuntu/work2/sites/persona_site_dev/static/videos/hero_case_003.mp4'
-file '/home/ubuntu/work2/sites/persona_site_dev/static/videos/hero_case_001.mp4'
-file '/home/ubuntu/work2/sites/persona_site_dev/static/videos/hero_case_004.mp4'
-file '/home/ubuntu/work2/sites/persona_site_dev/static/videos/hero_case_002.mp4'

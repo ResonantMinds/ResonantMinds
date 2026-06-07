@@ -1,0 +1,6 @@
+# Video backups and intermediates
+static/videos/original/
+static/videos/*.bak
+static/videos/concat_list.txt
+static/videos/hero_combined_original.mp4
+static/videos/hero_case_*.mp4

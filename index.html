@@ -877,12 +877,26 @@
 (function() {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  
+  const heroVideos = document.querySelectorAll('#hero-video, #hero-video-mobile');
+
   if (prefersReducedMotion || isMobile) {
-    document.querySelectorAll('#hero-video, #hero-video-mobile').forEach(function(v) {
+    heroVideos.forEach(function(v) {
       v.removeAttribute('autoplay');
       v.pause();
     });
+  }
+
+  // Hover-to-unmute hero background videos on desktop
+  if (!isMobile) {
+    const heroSection = document.querySelector('section.hero');
+    if (heroSection) {
+      heroSection.addEventListener('mouseenter', function() {
+        heroVideos.forEach(function(v) { v.muted = false; });
+      });
+      heroSection.addEventListener('mouseleave', function() {
+        heroVideos.forEach(function(v) { v.muted = true; });
+      });
+    }
   }
 })();
 </script>
