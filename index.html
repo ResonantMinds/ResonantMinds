@@ -22,7 +22,8 @@
 
   <style>
     /* Slightly larger base text for readability */
-    body { font-size: 17px; }
+    body { font-size: 17px; overflow-x: hidden; }
+    html { overflow-x: hidden; }
 
     /* Unified body text size across sections */
     .content.has-text-justified p {
@@ -47,7 +48,7 @@
         position: absolute !important;
         top: 0 !important;
         left: 0 !important;
-        width: 100vw !important;
+        width: 100% !important;
         height: 100vh !important;
         min-width: auto !important;
         min-height: auto !important;
@@ -474,7 +475,7 @@
     </div>
 
     <br>
-        <div class="content">
+    <div class="content" style="overflow-x: auto;">
       <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
         <thead>
           <tr>
@@ -674,7 +675,7 @@
         To probe generalization, we randomly sampled 30 additional OOD cases from DialToM and Sotopia-Hard, both adversarially curated for complex social reasoning.
       </p>
     </div>
-    <div class="content">
+    <div class="content" style="overflow-x: auto;">
       <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
         <thead>
           <tr>
