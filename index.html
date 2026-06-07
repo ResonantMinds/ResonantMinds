@@ -199,10 +199,9 @@
       <!-- Agent Personas -->
       <div class="columns" style="margin-top: 1.5rem;">
         <div class="column">
-          <div class="box" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1.25rem;">
-            <div style="width: 56px; height: 56px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; font-weight: bold;">
-              A
-            </div>
+          <div class="box" style="background-color: #f8f9fa; display: flex; align-items: flex-start; gap: 1rem; padding: 1.25rem;">
+            <img id="example-agent-a-avatar" src="static/images/avatars/case_001_agent_a.jpg" alt="Agent A"
+                 style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
             <div style="flex: 1;">
               <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem; flex-wrap: wrap;">
                 <h4 class="title is-6" style="margin: 0;" id="example-agent-a-name">Agent A</h4>
@@ -215,10 +214,9 @@
           </div>
         </div>
         <div class="column">
-          <div class="box" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1.25rem;">
-            <div style="width: 56px; height: 56px; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; font-weight: bold;">
-              B
-            </div>
+          <div class="box" style="background-color: #f8f9fa; display: flex; align-items: flex-start; gap: 1rem; padding: 1.25rem;">
+            <img id="example-agent-b-avatar" src="static/images/avatars/case_001_agent_b.jpg" alt="Agent B"
+                 style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
             <div style="flex: 1;">
               <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem; flex-wrap: wrap;">
                 <h4 class="title is-6" style="margin: 0;" id="example-agent-b-name">Agent B</h4>
@@ -951,6 +949,8 @@
   const exampleAgentBTrait = document.getElementById('example-agent-b-trait');
   const exampleAgentADesc = document.getElementById('example-agent-a-desc');
   const exampleAgentBDesc = document.getElementById('example-agent-b-desc');
+  const exampleAgentAAvatar = document.getElementById('example-agent-a-avatar');
+  const exampleAgentBAvatar = document.getElementById('example-agent-b-avatar');
   const examplePrevBtn = document.getElementById('example-prev');
   const exampleNextBtn = document.getElementById('example-next');
   const exampleCounter = document.getElementById('example-counter');
@@ -1165,6 +1165,12 @@
     }
     if (exampleAgentBName) {
       exampleAgentBName.textContent = caseData.agent_b.name + ' (Right)';
+    }
+    if (exampleAgentAAvatar) {
+      exampleAgentAAvatar.src = `static/images/avatars/case_${caseData.case_id}_agent_a.jpg`;
+    }
+    if (exampleAgentBAvatar) {
+      exampleAgentBAvatar.src = `static/images/avatars/case_${caseData.case_id}_agent_b.jpg`;
     }
     if (exampleAgentATrait) {
       exampleAgentATrait.textContent = caseData.agent_a.personality_trait;
