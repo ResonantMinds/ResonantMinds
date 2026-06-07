@@ -287,12 +287,6 @@
     <div class="scene-block" style="position: relative;">
       <div class="columns is-centered">
         <div class="column">
-          <h3 class="title is-5 has-text-centered" id="comparison-title">Comparison - Case 1</h3>
-          <p class="has-text-centered" style="color: #555; font-size: 1rem; max-width: 820px; margin: 0 auto 1.25rem; line-height: 1.6; padding: 0 1rem;">
-            <strong>Ours</strong> produces closed-loop dual-agent conversations driven by Theory-of-Mind reasoning, synthesizing both the speaker's speech/expression and the listener's reactive behaviors.
-            <strong>DICE-Talk</strong>, <strong>EDTalk</strong>, and <strong>Sonic</strong> are single-character talking-head baselines: they render one-sided utterances without listener reactions or social-goal awareness.
-          </p>
-
           <!-- 4 videos in grid -->
           <div class="columns is-multiline">
             <div class="column is-6">
@@ -351,6 +345,11 @@
               ›
             </button>
           </div>
+
+          <p class="has-text-centered" style="color: #555; font-size: 1rem; max-width: 820px; margin: 1.25rem auto 0; line-height: 1.6; padding: 0 1rem;">
+            <strong>Ours</strong> produces closed-loop dual-agent conversations driven by Theory-of-Mind reasoning, synthesizing both the speaker's speech/expression and the listener's reactive behaviors.
+            <strong>DICE-Talk</strong>, <strong>EDTalk</strong>, and <strong>Sonic</strong> are single-character talking-head baselines: they render one-sided utterances without listener reactions or social-goal awareness.
+          </p>
         </div>
       </div>
     </div>
@@ -1227,7 +1226,6 @@
     {elem: document.getElementById('comp-video-sonic'), name: 'sonic'}
   ].filter(v => v.elem);
   
-  const compTitle = document.getElementById('comparison-title');
   const compCounter = document.getElementById('comparison-counter');
   const compPrevBtn = document.getElementById('comparison-prev');
   const compNextBtn = document.getElementById('comparison-next');
@@ -1302,10 +1300,6 @@
         }, 300);
       }
     });
-
-    if (compTitle) {
-      compTitle.textContent = `Comparison - Case ${caseNum}`;
-    }
 
     if (compCounter) {
       compCounter.textContent = `${caseNum} / ${totalCompCases}`;
