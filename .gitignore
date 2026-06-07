@@ -4,3 +4,4 @@ static/videos/*.bak
 static/videos/concat_list.txt
 static/videos/hero_combined_original.mp4
 static/videos/hero_case_*.mp4
+static/videos/previous_hero/
