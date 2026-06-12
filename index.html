@@ -296,7 +296,7 @@
               <div style="position: relative; display: flex; justify-content: center;">
                 <div style="width: 100%;">
                   <p class="has-text-centered" style="margin-bottom: 0.5rem;"><strong>Ours</strong></p>
-                  <video id="comp-video-ours" class="comp-video" muted loop playsinline controls preload="metadata"
+                  <video id="comp-video-ours" class="comp-video" muted playsinline controls preload="metadata"
                          style="width: 100%; border-radius: 10px; display: block;">
                     <source src="static/videos/comparisons/comparison_case1_ours.mp4" type="video/mp4">
                   </video>
@@ -307,7 +307,7 @@
               <div style="position: relative; display: flex; justify-content: center;">
                 <div style="width: 100%;">
                   <p class="has-text-centered" style="margin-bottom: 0.5rem;"><strong>DICE-Talk</strong></p>
-                  <video id="comp-video-dicetalk" class="comp-video" muted loop playsinline controls preload="none"
+                  <video id="comp-video-dicetalk" class="comp-video" muted playsinline controls preload="metadata"
                          style="width: 100%; border-radius: 10px; display: block;">
                     <source src="static/videos/comparisons/comparison_case1_dicetalk.mp4" type="video/mp4">
                   </video>
@@ -318,7 +318,7 @@
               <div style="position: relative; display: flex; justify-content: center;">
                 <div style="width: 100%;">
                   <p class="has-text-centered" style="margin-bottom: 0.5rem;"><strong>EDTalk</strong></p>
-                  <video id="comp-video-edtalk" class="comp-video" muted loop playsinline controls preload="none"
+                  <video id="comp-video-edtalk" class="comp-video" muted playsinline controls preload="metadata"
                          style="width: 100%; border-radius: 10px; display: block;">
                     <source src="static/videos/comparisons/comparison_case1_edtalk.mp4" type="video/mp4">
                   </video>
@@ -329,7 +329,7 @@
               <div style="position: relative; display: flex; justify-content: center;">
                 <div style="width: 100%;">
                   <p class="has-text-centered" style="margin-bottom: 0.5rem;"><strong>Sonic</strong></p>
-                  <video id="comp-video-sonic" class="comp-video" muted loop playsinline controls preload="none"
+                  <video id="comp-video-sonic" class="comp-video" muted playsinline controls preload="metadata"
                          style="width: 100%; border-radius: 10px; display: block;">
                     <source src="static/videos/comparisons/comparison_case1_sonic.mp4" type="video/mp4">
                   </video>
@@ -1208,7 +1208,7 @@
   }
 })();
 
-// Comparison Video Carousel with hover audio control
+// Comparison Video Carousel: all four play simultaneously; hover for audio
 (function() {
   let currentCompIndex = 0;
   const totalCompCases = 5;
@@ -1225,44 +1225,40 @@
   const compPrevBtn = document.getElementById('comparison-prev');
   const compNextBtn = document.getElementById('comparison-next');
   const compDots = document.getElementById('comparison-dots');
+  const compContainer = document.querySelector('#video .scene-block');
   
-  // Performance: only play the hovered comparison video (or Ours by default).
-  // This avoids decoding 4 videos simultaneously.
-  function playOursMuted() {
-    compVideos.forEach(({elem, name}) => {
+  let endedCount = 0;
+  
+  function playAll() {
+    endedCount = 0;
+    compVideos.forEach(({elem}) => {
       if (!elem) return;
-      if (name === 'ours') {
-        elem.muted = true;
-        elem.play().catch(() => {});
-      } else {
-        elem.pause();
-        elem.muted = true;
-      }
+      elem.currentTime = 0;
+      elem.muted = true;
+      elem.play().catch(() => {});
     });
+  }
+  
+  function onVideoEnded() {
+    endedCount++;
+    if (endedCount >= compVideos.length) {
+      playAll();
+    }
   }
 
   compVideos.forEach(({elem}) => {
     elem.style.transition = 'opacity 0.3s ease-in-out';
-
+    elem.addEventListener('ended', onVideoEnded);
+    
     elem.addEventListener('mouseenter', function() {
-      // Pause all others, then play & unmute this one
       compVideos.forEach(({elem: other}) => {
-        if (other !== this) {
-          other.pause();
-          other.muted = true;
-        }
+        if (other !== this) other.muted = true;
       });
-      if (this.preload === 'none') {
-        this.preload = 'metadata';
-        this.load();
-      }
-      this.play().catch(() => {});
       this.muted = false;
     });
-
+    
     elem.addEventListener('mouseleave', function() {
       this.muted = true;
-      playOursMuted();
     });
   });
 
@@ -1270,15 +1266,6 @@
     currentCompIndex = (index + totalCompCases) % totalCompCases;
     const caseNum = currentCompIndex + 1;
 
-    // Pause all videos before switching
-    compVideos.forEach(({elem}) => {
-      if (elem) {
-        elem.pause();
-        elem.muted = true;
-      }
-    });
-
-    // Update all videos
     let loadedCount = 0;
     compVideos.forEach(({elem, name}) => {
       if (elem) {
@@ -1290,14 +1277,13 @@
             elem.style.opacity = '1';
             loadedCount++;
             if (loadedCount === compVideos.length) {
-              playOursMuted();
+              playAll();
             }
           }, 50);
         }, 300);
       }
     });
 
-    // Update dots
     if (compDots) {
       compDots.innerHTML = '';
       for (let i = 0; i < totalCompCases; i++) {
@@ -1309,8 +1295,8 @@
     }
   }
 
-  // Start with Ours playing muted
-  playOursMuted();
+  // Start playing all videos muted
+  playAll();
   
   if (compPrevBtn) {
     compPrevBtn.addEventListener('click', () => updateComparisonVideos(currentCompIndex - 1));
@@ -1318,6 +1304,21 @@
   
   if (compNextBtn) {
     compNextBtn.addEventListener('click', () => updateComparisonVideos(currentCompIndex + 1));
+  }
+  
+  // Pause when out of viewport, resume (from start) when visible
+  if (compContainer && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.some(entry => entry.isIntersecting);
+      if (visible) {
+        playAll();
+      } else {
+        compVideos.forEach(({elem}) => {
+          if (elem) elem.pause();
+        });
+      }
+    }, { threshold: 0.1 });
+    observer.observe(compContainer);
   }
 })();
 
@@ -1336,7 +1337,7 @@
     }, { threshold: 0.5 });
     
     // Observe all videos except hero and comparison grid
-    // (comparison videos are managed separately to avoid decoding 4 at once)
+    // (comparison videos are managed separately for synchronized playback)
     document.querySelectorAll('video:not(#hero-video):not(.comp-video)').forEach(video => {
       observer.observe(video);
     });
